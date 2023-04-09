@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BillingController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PatientController;
@@ -92,6 +93,16 @@ Route::middleware(['auth','verified'])->controller(ItemController::class)->group
     Route::any('/item/delete/{id}','destroy')->name('item.delete');
     Route::post('/item/getItemsJson','getItemsJson')->name('item.getItemsJson');
 });
+
+Route::middleware(['auth','verified'])->controller(BillingController::class)->group(function (){
+    Route::get('/billing/create','create')->name('billing.create');
+    Route::get('/billing/index','index')->name('billing.index');
+    Route::post('/billing/store','store')->name('billing.store');
+    Route::get('/billing/show/{id}','show')->name('billing.show');
+    Route::get('/billing/getItem/{id}','getItem')->name('getItem');
+
+});
+
 
 
 

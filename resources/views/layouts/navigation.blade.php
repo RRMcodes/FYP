@@ -62,12 +62,25 @@
                     </a>
                 </li>
 
-                <li class="{{ (str_contains(url()->current(), 'billing') ? 'active' : '' ) }}">
-                    <a href="" class="waves-effect waves-dark ">
-                        <span class="pcoded-micon"><i class="fa fa-receipt fa-lg"></i></span>
+                <li class="pcoded-hasmenu {{(str_contains(url()->current(), 'billing') ? 'active pcoded-trigger' : '' )}}">
+                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                        <span class="pcoded-micon"><i class="fa-solid fa-receipt"></i></span>
                         <span class="pcoded-mtext">Billing</span>
                     </a>
+                    <ul class="pcoded-submenu">
+                        <li class="{{(str_contains(url()->current(), 'billing/create') ? 'active' : '' )}}">
+                            <a href="{{route('billing.create')}}" class="waves-effect waves-dark ">
+                                <span class="pcoded-mtext">New Transaction</span>
+                            </a>
+                        </li>
+                        <li class="{{(str_contains(url()->current(), 'billing/index') ? 'active' : '' )}}">
+                            <a href="{{route('billing.index')}}" class="waves-effect waves-dark ">
+                                <span class="pcoded-mtext">Transaction Log</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+
 
                 <li class="{{ (str_contains(url()->current(), 'appointments') ? 'active' : '' ) }}">
                     <a href="" class="waves-effect waves-dark ">
