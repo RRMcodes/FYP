@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
+use App\Models\ItemLog;
 use App\Models\Service;
+use App\Models\ServiceLog;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -16,6 +19,14 @@ class ServiceController extends Controller
     {
         $services = Service::all();
         return view('service.index')->with(compact('services'));
+    }
+
+
+    public function serviceLog()
+    {
+        $serviceLogs = ServiceLog::all();
+        $services = Service::all();
+        return view('service.log')->with(compact('serviceLogs','services'));
     }
 
     /**

@@ -54,16 +54,37 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-sm-2 col-form-label">Abbreviation</label>
+                                                <label class="col-sm-2 col-form-label">Manufacturer</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="abbreviation" name="abbreviation" value="{{$item->abbreviation}}" placeholder="" required>
+                                                    <input type="text" class="form-control" id="manufacturer" name="manufacturer" value="{{$item->manufacturer}}" placeholder="" >
+                                                    <span class="messages"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">Manufactured Date</label>
+                                                <div class="col-sm-12 col-xl-4">
+                                                    {{--                                            <p>Add type<code>&lt;input type="date"&gt;</code></p>--}}
+                                                    <input class="form-control" type="date" name="manufactured_date" value="{{$item->manufactured_date}}" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">Expiry_date</label>
+                                                <div class="col-sm-12 col-xl-4">
+                                                    {{--                                            <p>Add type<code>&lt;input type="date"&gt;</code></p>--}}
+                                                    <input class="form-control" type="date" name="expiry_date" value="{{$item->expiry_date}}" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">Quantity</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="quantity" name="quantity"  placeholder=""  value="{{$item->quantity}}" required>
                                                     <span class="messages"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">Price</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="price" name="price" value="{{$item->price}}" placeholder="" required>
+                                                    <input type="text" class="form-control" id="price" name="price"  placeholder="" value="{{$item->price}}" required>
                                                     <span class="messages"></span>
                                                 </div>
                                             </div>

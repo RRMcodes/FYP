@@ -54,12 +54,24 @@
                 </li>
 
 
-                <li class="{{ (str_contains(url()->current(), 'item') ? 'active' : '' ) }}">
-                    <a href="{{route('item.index')}}" class="waves-effect waves-dark ">
+
+                <li class="pcoded-hasmenu {{(str_contains(url()->current(), 'item/') ? 'active pcoded-trigger' : '' )}}">
+                    <a href="javascript:void(0)" class="waves-effect waves-dark">
                         <span class="pcoded-micon"><i class="fa-solid fa-warehouse"></i></span>
-                        <span class="pcoded-badge label label-warning">NEW</span>
                         <span class="pcoded-mtext">Inventory</span>
                     </a>
+                    <ul class="pcoded-submenu">
+                        <li class="{{(str_contains(url()->current(), 'item/index') ? 'active' : '' )}}">
+                            <a href="{{route('item.index')}}" class="waves-effect waves-dark ">
+                                <span class="pcoded-mtext">View Items</span>
+                            </a>
+                        </li>
+                        <li class="{{(str_contains(url()->current(), 'item/itemLog') ? 'active' : '' )}}">
+                            <a href="{{route('item.itemLog')}}" class="waves-effect waves-dark ">
+                                <span class="pcoded-mtext">Item Log</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="pcoded-hasmenu {{(str_contains(url()->current(), 'billing') ? 'active pcoded-trigger' : '' )}}">
@@ -68,9 +80,14 @@
                         <span class="pcoded-mtext">Billing</span>
                     </a>
                     <ul class="pcoded-submenu">
-                        <li class="{{(str_contains(url()->current(), 'billing/create') ? 'active' : '' )}}">
-                            <a href="{{route('billing.create')}}" class="waves-effect waves-dark ">
-                                <span class="pcoded-mtext">New Transaction</span>
+                        <li class="{{(str_contains(url()->current(), 'billing/item') ? 'active' : '' )}}">
+                            <a href="{{route('billing.itemCreate')}}" class="waves-effect waves-dark ">
+                                <span class="pcoded-mtext">Pharmacy</span>
+                            </a>
+                        </li>
+                        <li class="{{(str_contains(url()->current(), 'billing/test') ? 'active' : '' )}}">
+                            <a href="{{route('billing.testCreate')}}" class="waves-effect waves-dark ">
+                                <span class="pcoded-mtext">Clinical tests</span>
                             </a>
                         </li>
                         <li class="{{(str_contains(url()->current(), 'billing/index') ? 'active' : '' )}}">
@@ -91,12 +108,31 @@
                     </a>
                 </li>
 
-                <li class="{{ (str_contains(url()->current(), 'service') ? 'active' : '' ) }}">
-                    <a href="{{route('service.index')}}" class="waves-effect waves-dark ">
-                        <span class="pcoded-micon"><i class="fa-solid fa-microscope"></i></span>
+{{--                <li class="{{ (str_contains(url()->current(), 'service') ? 'active' : '' ) }}">--}}
+{{--                    <a href="{{route('service.index')}}" class="waves-effect waves-dark ">--}}
+{{--                        <span class="pcoded-micon"><i class="fa-solid fa-microscope"></i></span>--}}
 
+{{--                        <span class="pcoded-mtext">Clinical Tests</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+
+                <li class="pcoded-hasmenu {{(str_contains(url()->current(), 'service') ? 'active pcoded-trigger' : '' )}}">
+                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                        <span class="pcoded-micon"><i class="fa-solid fa-microscope"></i></span>
                         <span class="pcoded-mtext">Clinical Tests</span>
                     </a>
+                    <ul class="pcoded-submenu">
+                        <li class="{{(str_contains(url()->current(), 'service/index') ? 'active' : '' )}}">
+                            <a href="{{route('service.index')}}" class="waves-effect waves-dark ">
+                                <span class="pcoded-mtext">View Tests</span>
+                            </a>
+                        </li>
+                        <li class="{{(str_contains(url()->current(), 'service/serviceLog') ? 'active' : '' )}}">
+                            <a href="{{route('service.serviceLog')}}" class="waves-effect waves-dark ">
+                                <span class="pcoded-mtext">Test Log</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
 

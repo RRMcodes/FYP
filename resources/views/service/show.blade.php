@@ -86,7 +86,7 @@
                                     </div>
                                     <div class="card-footer text-right">
                                         <a href="{{ route('doctor.edit', $doctor->id) }}" class="btn btn-primary">Edit</a>
-                                        <a href="{{ route('doctor.index') }}" class="btn btn-danger">Back</a>
+                                        <a href="{{ route('service.index') }}" class="btn btn-danger">Back</a>
                                             </div>
                                         </div>
                                     </div>

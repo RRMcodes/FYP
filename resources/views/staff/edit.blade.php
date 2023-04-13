@@ -145,7 +145,7 @@
                                             <label class="col-sm-2"></label>
                                             <div class="col-sm-10">
                                                 <button type="submit" class="btn btn-primary m-b-0">Submit</button>
-                                                <a href="{{ route('item.index') }}" class="btn btn-danger">Back</a>
+                                                <a href="{{ route('staff.index') }}" class="btn btn-danger">Back</a>
 
                                             </div>
                                         </div>

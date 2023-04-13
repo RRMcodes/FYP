@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Billing;
 use App\Models\Doctor;
-use App\Models\Event;
 use App\Models\Item;
 use App\Models\ItemLog;
 use App\Models\Patient;
-use App\Models\TicketType;
+use App\Models\Service;
+use App\Models\ServiceLog;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -29,7 +29,6 @@ class BillingController extends Controller
         return view('billing.index')->with(compact('billings', 'patients', 'doctors'));
     }
 
-
     public function getItem($id){
         $item = Item::findOrFail($id);
         return($item);
@@ -40,12 +39,20 @@ class BillingController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function create()
+    public function itemCreate()
     {
         $patients = Patient::all();
         $doctors = Doctor::all();
         $items = Item::all();
         return view('billing.create')->with(compact('patients', 'doctors','items'));
+    }
+
+    public function testCreate()
+    {
+        $patients = Patient::all();
+        $doctors = Doctor::all();
+        $services = Service::all();
+        return view('billing.createTest')->with(compact('patients', 'doctors','services'));
     }
 
     /**
@@ -54,17 +61,15 @@ class BillingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function itemStore(Request $request)
     {
         $billing = Billing::create([
             'patient_id' => $request->patient_id,
             'doctor_id' => $request->doctor_id,
             'date' => $request->date,
             'transaction_amount' => $request->grand_total,
-
+            'transaction' => 'item'
         ]);
-
-
 
 //        create item log
         $item_collection = [];
@@ -85,9 +90,37 @@ class BillingController extends Controller
                 array_push($item_collection, $obj);
             }
         }
-
         ItemLog::insert($item_collection);
+        return redirect()->route('billing.index');
+    }
 
+
+    public function testStore(Request $request)
+    {
+        $billing = Billing::create([
+            'patient_id' => $request->patient_id,
+            'doctor_id' => $request->doctor_id,
+            'date' => $request->date,
+            'transaction_amount' => $request->grand_total,
+            'transaction' => 'test'
+        ]);
+
+//        create service log
+        $service_collection = [];
+
+        if (isset($request->serviceId)) {
+            foreach ($request->serviceId as $key => $value) {
+                $obj = [
+                    'billing_id'  => $billing->id,
+                    'service_id'     => $request->serviceId[$key],
+                ];
+
+
+
+                array_push($service_collection, $obj);
+            }
+        }
+        ServiceLog::insert($service_collection);
         return redirect()->route('billing.index');
     }
 
@@ -97,14 +130,22 @@ class BillingController extends Controller
      * @param  int  $id
      * @return Application|Factory|View
      */
-    public function show($id)
+    public function itemShow($id)
     {
         $items = Item::all();
         $billing = Billing::find($id);
         $patient = Patient::find($billing->patient_id);
         $doctor = Doctor::find($billing->doctor_id);
         $itemLogs = ItemLog::where('billing_id', $id)->get();
-        return view('billing.show')->with(compact('itemLogs','items','billing', 'patient', 'doctor'));
+        $services = Service::all();
+        $serviceLogs = ServiceLog::where('billing_id', $id)->get();
+        if ($billing->transaction == 'item') {
+            return view('billing.show')->with(compact('itemLogs', 'items', 'billing', 'patient', 'doctor'));
+        }
+        elseif ($billing->transaction == 'test'){
+            return view('billing.showTest')->with(compact('serviceLogs', 'services', 'billing', 'patient', 'doctor'));
+
+        }
     }
 
     /**

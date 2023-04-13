@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\ItemLog;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -21,6 +22,13 @@ class ItemController extends Controller
     {
         $items = Item::all();
         return view('item.index')->with(compact('items'));
+    }
+
+    public function itemLog()
+    {
+        $itemLogs = ItemLog::all();
+        $item = Item::all();
+        return view('item.log')->with(compact('itemLogs','item'));
     }
 
     /**
@@ -82,15 +90,24 @@ class ItemController extends Controller
     {
         $new_item = $request->except(['_token']);
         $item = Item::find($request->id);
-        $total = $new_item->quantity - $item->quantity;
-        if ($total >0 ){
-            $new_item->status='added';
+        $total = $new_item['quantity'] - $item->quantity;
+        if ($total > 0 ){
+            ItemLog::create([
+                'item_id'=>$item->id,
+                'quantity'=>abs($total),
+                'status'=> 'added'
+            ]);        }
+        else if ($total < 0){
+            ItemLog::create([
+                'item_id'=>$item->id,
+                'quantity'=>abs($total),
+                'status'=> 'deducted'
+            ]);
         }
-        else{
-            $new_item->status = 'deducted';
-        }
-        dd($new_item);
-        $new_item->save();
+
+
+
+        Item::find($request->id)->update($new_item);
         return redirect()->route('item.index')->with('success', 'Item updated successfully.');
 
     }

@@ -79,6 +79,7 @@ Route::middleware(['auth','verified'])->controller(ServiceController::class)->gr
     Route::get('/service/show/{id}','show')->name('service.show');
     Route::post('/service/update','update')->name('service.update');
     Route::any('/service/delete/{id}','destroy')->name('service.delete');
+    Route::get('/service/serviceLog','serviceLog')->name('service.serviceLog');
     Route::post('/service/getServicesJson','getServicesJson')->name('service.getServicesJson');
 
 });
@@ -92,14 +93,18 @@ Route::middleware(['auth','verified'])->controller(ItemController::class)->group
     Route::post('/item/update','update')->name('item.update');
     Route::any('/item/delete/{id}','destroy')->name('item.delete');
     Route::post('/item/getItemsJson','getItemsJson')->name('item.getItemsJson');
+    Route::get('/item/itemLog','itemLog')->name('item.itemLog');
+
 });
 
 Route::middleware(['auth','verified'])->controller(BillingController::class)->group(function (){
-    Route::get('/billing/create','create')->name('billing.create');
+    Route::get('/billing/itemCreate','itemCreate')->name('billing.itemCreate');
     Route::get('/billing/index','index')->name('billing.index');
-    Route::post('/billing/store','store')->name('billing.store');
-    Route::get('/billing/show/{id}','show')->name('billing.show');
+    Route::post('/billing/itemStore','itemStore')->name('billing.itemStore');
+    Route::get('/billing/itemShow/{id}','itemShow')->name('billing.itemShow');
     Route::get('/billing/getItem/{id}','getItem')->name('getItem');
+    Route::get('/billing/testCreate','testCreate')->name('billing.testCreate');
+    Route::post('/billing/testStore','testStore')->name('billing.testStore');
 
 });
 

@@ -16,7 +16,7 @@ class Billing extends Model
         'patient_id',
         'doctor_id',
         'date',
-        'transaction_amount'
-
+        'transaction_amount',
+        'transaction'
     ];
 }

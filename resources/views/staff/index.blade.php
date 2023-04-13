@@ -19,7 +19,6 @@
                                             <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>
                                         </div>
 
-                                    <div class="card">
                                         <div class="card-header">
                                             <a href="{{route('staff.create')}}" class="btn btn-primary" action="">Add staff</a>
                                         </div>
@@ -70,7 +69,6 @@
                                                 @endif
                                             </div>
                                         </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

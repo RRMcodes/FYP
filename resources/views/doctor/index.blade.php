@@ -13,9 +13,7 @@
                         <div class="page-body">
                             <div class="row">
                                 <div class="col-sm-12">
-
-                                    <div class="card">
-                                        <div class="card">
+                                     <div class="card">
                                             <div class="card-header">
                                                 <h5>List of Doctors records</h5>
                                                 <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>
@@ -72,7 +70,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>

@@ -5,19 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use mysql_xdevapi\Table;
 
-class ItemLog extends Model
+class ServiceLog extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $table ='item_logs';
+    protected $table ='service_logs';
     protected $fillable = [
         'billing_id',
-        'item_id',
-        'quantity',
-        'status'
+        'service_id',
     ];
 }
-

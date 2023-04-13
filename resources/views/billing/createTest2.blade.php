@@ -14,7 +14,7 @@
                                     </div>
                                     <div class="card-block table-border-style">
 
-                                        <form action="{{route('billing.itemStore')}}" method="post">
+                                        <form action="{{route('billing.testStore')}}" method="post">
                                             {{csrf_field()}}
                                             <div class="form-group row pl-4">
 
@@ -70,12 +70,12 @@
                                                 </div>
                                             </div>
                                             <div class="table-responsive">
-                                                <table class="table" id="itemTable">
+                                                <table class="table" id="serviceTable">
                                                     <thead>
                                                     <tr>
                                                         <th>Sno.</th>
-                                                        <th>Item</th>
-                                                        <th>Quantity</th>
+                                                        <th>Test</th>
+                                                        <th>Abbreviation</th>
                                                         <th>Price</th>
                                                         <th>Sub Total</th>
                                                     </tr>
@@ -84,14 +84,14 @@
                                                     <tr>
                                                         <th scope="row">1</th>
                                                         <td>
-                                                            <select class="form-control itemName" name="itemId[]" id="itemName_1" required>
+                                                            <select class="form-control serviceId" name="serviceId[]" id="serviceName_1" required>
                                                                 <option value="" disabled selected>--Select--</option>
-                                                                @foreach($items as $item)
-                                                                    <option value="{{$item->id}}" data-price="{{$item->price}}">{{$item->name}}</option>
+                                                                @foreach($services as $service)
+                                                                    <option value="{{$service->id}}" data-price="{{$service->price}}" data-abv="{{$service->abbreviation}}">{{$service->name}}</option>
                                                                 @endforeach
                                                             </select>
                                                         </td>
-                                                        <td><input type="number" class="quantity" name="quantity[]" id="quantity_1" value=""></td>
+                                                        <td><input type="text" class="abv" name="" value="" id="abv_1" disabled></td>
                                                         <td><input type="number" class="price" name="price[]" value="" id="price_1" disabled></td>
                                                         <td><input type="number" class="sub_total" name="sub_total[]" value="" id="sub_total_1" disabled></td>
                                                     </tr>
@@ -143,11 +143,11 @@
 
         $(document).ready(function() {
 
-            $('.itemName').select2();
+            $('.serviceId').select2();
             $('#patient_name').select2();
             $('#doctor_name').select2();
 
-            getPrice(".itemName");
+            getPrice(".serviceId");
             patientDetails("#patient_name");
 
             var rowNum = 1;
@@ -158,35 +158,32 @@
                 var row = '<tr>' +
                     '<th scope="row">' + rowNum + '</th>' +
                     '<td>' +
-                    '<select class="form-control itemName" name="itemId[]" id="itemName_' + rowNum + '">' +
+                    '<select class="form-control serviceId" name="serviceId[]" id="serviceName_' + rowNum + '">' +
                     '<option value="" disabled selected>--Select--</option>' +
-                    '@foreach($items as $item)' +
-                    '<option value="{{$item->id}}">{{$item->name}}</option>' +
+                    '@foreach($services as $service)' +
+                    '<option value="{{$service->id}}" data-price="{{$service->price}}" data-abv="{{$service->abbreviation}}">{{$service->name}}</option>' +
                     '@endforeach' +
                     '</select>' +
                     '</td>' +
-                    '<td><input type="number" class="quantity" name="quantity[]" id="quantity_' + rowNum + '" value=""></td>' +
+                    '<td><input type="text" class="" name="abv" value="" id="abv_'+ rowNum + '" disabled></td>' +
                     '<td><input type="number" class="price" name="price[]" value="" id="price_' + rowNum + '" disabled></td>' +
                     '<td><input type="number" class="sub_total" name="sub_total[]" value="" id="sub_total_' + rowNum + '" disabled></td>' +
                     '</tr>';
 
-                $("#itemTable tbody").append(row);
+                $("#serviceTable tbody").append(row);
 
-                var lastId = '#' + $('#itemTable select:last').attr('id');
+                var lastId = '#' + $('#serviceTable select:last').attr('id');
 
                 getPrice(lastId);
                 $(lastId).select2();
 
             });
 
-            $(document).on("change", ".itemName", function() {
+            $(document).on("change", ".serviceId", function() {
+
                 getPrice(this);
             });
 
-            $(document).on("input", ".quantity", function() {
-                var rowId = $(this).attr("id").split("_")[1];
-                calculateTotal(rowId);
-            });
 
             $(document).on("change", "#patient_name", function() {
                 patientDetails(this);
@@ -209,20 +206,24 @@
             }
 
             function getPrice (classname) {
-                var itemId = $(classname).val();
+
+                var price = $(classname).find('option:selected').data('price');
+                var abv = $(classname).find('option:selected').data('abv');
                 var rowId = $(classname).attr("id").split("_")[1];
+                $("#price_" + rowId).val(price);
+                $("abv_" + rowId).val(abv);
 
-                // var price = $(this).find('option:selected').data('price');
-                // $(this).closest('tr').find('.price').val(price);
 
-                $.get('/fyp/public/billing/getItem/' + itemId, function(item) {
-                    $("#price_" + rowId).val(item.price);
-                    calculateTotal(rowId);
-                });
+                // var serviceId = $(classname).val();
+                // var rowId = $(classname).attr("id").split("_")[1];
+                //
+                // $.get('/fyp/public/billing/getItem/' + serviceId, function(service) {
+                //     $("#price_" + rowId).val(service.price);
+                //     calculateTotal(rowId);
+                // });
             }
 
             function calculateTotal(rowId) {
-                var quantity = $("#quantity_" + rowId).val();
                 var price = $("#price_" + rowId).val();
 
 
