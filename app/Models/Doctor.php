@@ -26,5 +26,6 @@ class Doctor extends Model
         "experience",
         "start_date",
         "end_date",
+        "schedule"
     ];
 }

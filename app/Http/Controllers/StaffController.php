@@ -52,7 +52,7 @@ class StaffController extends Controller
     public function show($id)
     {
         $staff = Staff::find($id);
-        return view('staff.show')->with(compact('staff'));
+        return view('staff.show2')->with(compact('staff'));
     }
 
     /**

@@ -69,52 +69,13 @@
                 </div>
             </div>
         </div>
-        {{--            {{ $events->links() }}--}}
 
+            <script>
+                $(document).ready( function () {
+                    $('#myTable').DataTable();
+                } );
+            </script>
 
-{{--    <script>--}}
-{{--        $(document).ready( function () {--}}
-{{--            $('#myTable').DataTable({--}}
-{{--                pageLength: 8,--}}
-{{--                ajax : '{{route('service.getServicesJson')}}',--}}
-{{--                columns: [--}}
-{{--                    { data: function (data, type, row, meta) {--}}
-{{--                            return meta.row + meta.settings._iDisplayStart + 1;--}}
-{{--                        },name: "sn", searchable: false ,orderable:false},--}}
-{{--                    {data:"name", name:"name"},--}}
-{{--                    {data: "type", name: "type"},--}}
-{{--                    {data: "start_date", name: "start_date"},--}}
-{{--                    {data: "end_date", name: "end_date"},--}}
-{{--                    {data: "details", name: "details"},--}}
-{{--                    {data: "quantity", name: "quantity"},--}}
-{{--                    {data: "quantity", name: "quantity"},--}}
-{{--                    {data: "quantity", name: "quantity"},--}}
-
-
-{{--                    --}}{{--{ data: function(data,b,c,table) {--}}
-{{--                    --}}{{--        var buttons = '';--}}
-{{--                    --}}{{--        buttons += "<a class='btn btn-sm btn-primary'  href='{{route('service.edit',array('id'=>false))}}"+"/"+data.id+"' type='button' title='Edit'><i class='fa fa-edit'></i></a>&nbsp";--}}
-{{--                    --}}{{--        buttons += "<a class='btn btn-sm btn-primary'  href='{{route('service.show',array('id'=>false))}}"+"/"+data.id+"' type='button' title='Show'> Issue</a>&nbsp";--}}
-{{--                    --}}{{--        buttons += "<a type='button'  data-id='"+data.id+"' class='btn btn-sm btn-danger del' title='Delete' ><i class='fa fa-trash'></i></a>";--}}
-{{--                    --}}{{--        return buttons;--}}
-{{--                    --}}{{--    }, name:'action',searchable: false,orderable: false},--}}
-{{--                ]--}}
-{{--            });--}}
-{{--        } );--}}
-
-{{--        --}}{{--$(document).on('click','.del',function (){--}}
-{{--        --}}{{--    var id = $(this).data('id');--}}
-{{--        --}}{{--    alertify.confirm('Delete?', 'Are You Sure you want to delete this record?', function(){	$.get("{{route('service.delete',array('id'=>false))}}"+"/"+id,function (d) {--}}
-{{--        --}}{{--            alertify.success("Record Deleted");--}}
-{{--        --}}{{--            $('#myTable').DataTable().ajax.reload();--}}
-{{--        --}}{{--        });}--}}
-{{--        --}}{{--        , function(){ });--}}
-{{--        --}}{{--});--}}
-
-{{--        function edited () {--}}
-{{--            alertify.success('Record edited');--}}
-{{--        }--}}
-{{--    </script>--}}
 
 
 @endsection

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
@@ -26,12 +27,19 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $patients = \App\Models\Patient::all();
+    $billings = \App\Models\Billing::all();
+    $appointments = \App\Models\Appointment::all();
+    $items = \App\Models\Item::all();
+    $doctors = \App\Models\Doctor::all();
+    $staffs = \App\Models\Staff::all();
+    return view('dashboard')->with(compact('patients', 'billings', 'appointments','items', 'doctors','staffs'));
+
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
@@ -64,6 +72,7 @@ Route::middleware(['auth','verified'])->controller(DoctorController::class)->gro
     Route::post('/doctor/store','store')->name('doctor.store');
     Route::get('/doctor/index','index')->name('doctor.index');
     Route::get('/doctor/edit/{id}','edit')->name('doctor.edit');
+    Route::get('/doctor/schedule/{id}','schedule')->name('doctor.schedule');
     Route::get('/doctor/show/{id}','show')->name('doctor.show');
     Route::post('/doctor/update','update')->name('doctor.update');
     Route::any('/doctor/delete/{id}','destroy')->name('doctor.delete');
@@ -97,7 +106,7 @@ Route::middleware(['auth','verified'])->controller(ItemController::class)->group
 
 });
 
-Route::middleware(['auth','verified'])->controller(BillingController::class)->group(function (){
+Route::middleware(['auth','verified','staff'])->controller(BillingController::class)->group(function (){
     Route::get('/billing/itemCreate','itemCreate')->name('billing.itemCreate');
     Route::get('/billing/index','index')->name('billing.index');
     Route::post('/billing/itemStore','itemStore')->name('billing.itemStore');
@@ -105,7 +114,12 @@ Route::middleware(['auth','verified'])->controller(BillingController::class)->gr
     Route::get('/billing/getItem/{id}','getItem')->name('getItem');
     Route::get('/billing/testCreate','testCreate')->name('billing.testCreate');
     Route::post('/billing/testStore','testStore')->name('billing.testStore');
+});
 
+Route::middleware(['auth','verified','appointment'])->controller(AppointmentController::class)->group(function (){
+    Route::get('/appointment/index','index')->name('appointment.index');
+    Route::get('/appointment/create','create')->name('appointment.create');
+    Route::post('/appointment/store','store')->name('appointment.store');
 });
 
 

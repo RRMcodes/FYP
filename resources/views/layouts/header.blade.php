@@ -2,7 +2,8 @@
     <div class="navbar-wrapper">
         <div class="navbar-logo">
             <a href="index.html">
-                <img class="img-fluid" src="{{asset('template/png/logo.png')}}" alt="Theme-Logo" />
+                <h3> <i class="fas fa-clinic-medical"></i> E-clinic</h3>
+{{--                <img class="img-fluid" src="{{asset('template/png/logo.png')}}" alt="Theme-Logo" />--}}
             </a>
             <a class="mobile-menu" id="mobile-collapse" href="#!">
                 <i class="feather icon-menu icon-toggle-right"></i>
@@ -100,18 +101,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{route('profile.edit')}}">
                                     <i class="feather icon-user"></i> Profile
-                                </a>
-                            </li>
-                            <li>
-                                <a href="email-inbox.html">
-                                    <i class="feather icon-mail"></i> My Messages
-                                </a>
-                            </li>
-                            <li>
-                                <a href="auth-lock-screen.html">
-                                    <i class="feather icon-lock"></i> Lock Screen
                                 </a>
                             </li>
                             <li>

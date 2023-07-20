@@ -8,31 +8,10 @@
                         <span class="pcoded-micon"><i class="feather icon-home fa-lg"></i></span>
                         <span class="pcoded-mtext">Dashboard</span>
                     </a>
-                    <ul class="pcoded-submenu">
-{{--                        <li class="{{ (str_contains(url()->current(), 'items.index') ? 'active' : '' ) }}">--}}
-{{--                            <a href="" class="waves-effect waves-dark ">--}}
-{{--                                <span class="pcoded-mtext">Items</span>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li class="{{ (str_contains(url()->current(), 'blogs.index') ? 'active' : '' ) }}">--}}
-{{--                            <a href="" class="waves-effect waves-dark ">--}}
-{{--                                <span class="pcoded-mtext">Blogs</span>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li class="{{ (str_contains(url()->current(), 'eventTypes.index') ? 'active' : '' ) }}">--}}
-{{--                            <a href="" class="waves-effect waves-dark ">--}}
-{{--                                <span class="pcoded-mtext">Event Type</span>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
 
-{{--                        <li class="{{ (str_contains(url()->current(), 'ticketTypes.index') ? 'active' : '' ) }}">--}}
-{{--                            <a href="" class="waves-effect waves-dark ">--}}
-{{--                                <span class="pcoded-mtext">Ticket Type</span>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-
-                    </ul>
                 </li>
+                @if (Auth::user()->role == 'staff' || Auth::user()->role == 'admin')
+
                 <li class="{{ (str_contains(url()->current(), 'staff') ? 'active' : '' ) }}">
                     <a href="{{route('staff.index')}}" class="waves-effect waves-dark ">
                         <span class="pcoded-micon"><i class="fa-solid fa-user fa-lg"></i></span>
@@ -45,15 +24,21 @@
                         <span  class="pcoded-mtext">Doctors</span>
                     </a>
                 </li>
+                @endif
 
-                <li class="{{ (str_contains(url()->current(), 'patient') ? 'active' : '' ) }}">
+                    @if (Auth::user()->role == 'staff' || Auth::user()->role == 'admin' || Auth::user()->role == 'doctor' )
+
+                    <li class="{{ (str_contains(url()->current(), 'patient') ? 'active' : '' ) }}">
                     <a href="{{route('patient.index')}}" class="waves-effect waves-dark ">
                         <span class="pcoded-micon"><i class="fa fa-user-plus fa-lg"></i></span>
                         <span class="pcoded-mtext">Patient</span>
                     </a>
-                </li>
+                    </li>
+                    @endif
 
 
+
+                @if (Auth::user()->role == 'staff' || Auth::user()->role == 'admin')
 
                 <li class="pcoded-hasmenu {{(str_contains(url()->current(), 'item/') ? 'active pcoded-trigger' : '' )}}">
                     <a href="javascript:void(0)" class="waves-effect waves-dark">
@@ -97,17 +82,41 @@
                         </li>
                     </ul>
                 </li>
+                @endif
 
+{{--                <li class="{{ (str_contains(url()->current(), 'appointment') ? 'active' : '' ) }}">--}}
+{{--                    <a href="{{route('appointment.create')}}" class="waves-effect waves-dark ">--}}
+{{--                        <span class="pcoded-micon"><i class="fa-regular fa-calendar-days fa-lg"></i></span>--}}
+{{--                        <span class="pcoded-badge label label-danger">100+</span>--}}
 
-                <li class="{{ (str_contains(url()->current(), 'appointments') ? 'active' : '' ) }}">
-                    <a href="" class="waves-effect waves-dark ">
+{{--                        <span class="pcoded-mtext">Appointments</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+
+                @if (Auth::user()->role == 'staff' || Auth::user()->role == 'doctor')
+
+                <li class="pcoded-hasmenu {{(str_contains(url()->current(), 'appointment') ? 'active pcoded-trigger' : '' )}}">
+                    <a href="javascript:void(0)" class="waves-effect waves-dark">
                         <span class="pcoded-micon"><i class="fa-regular fa-calendar-days fa-lg"></i></span>
-                        <span class="pcoded-badge label label-danger">100+</span>
-
                         <span class="pcoded-mtext">Appointments</span>
-                    </a>
-                </li>
 
+                    </a>
+                    <ul class="pcoded-submenu">
+                        <li class="{{(str_contains(url()->current(), 'appointment/create') ? 'active' : '' )}}">
+                            <a href="{{route('appointment.create')}}" class="waves-effect waves-dark ">
+                                <span class="pcoded-mtext">New appointment</span>
+                                {{--                        <span class="pcoded-badge label label-danger">100+</span>--}}
+
+                            </a>
+                        </li>
+                        <li class="{{(str_contains(url()->current(), 'appointment/index') ? 'active' : '' )}}">
+                            <a href="{{route('appointment.index')}}" class="waves-effect waves-dark ">
+                                <span class="pcoded-mtext">View Appointments</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
 {{--                <li class="{{ (str_contains(url()->current(), 'service') ? 'active' : '' ) }}">--}}
 {{--                    <a href="{{route('service.index')}}" class="waves-effect waves-dark ">--}}
 {{--                        <span class="pcoded-micon"><i class="fa-solid fa-microscope"></i></span>--}}
@@ -115,6 +124,8 @@
 {{--                        <span class="pcoded-mtext">Clinical Tests</span>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
+
+                @if (Auth::user()->role == 'staff' )
 
                 <li class="pcoded-hasmenu {{(str_contains(url()->current(), 'service') ? 'active pcoded-trigger' : '' )}}">
                     <a href="javascript:void(0)" class="waves-effect waves-dark">
@@ -134,75 +145,75 @@
                         </li>
                     </ul>
                 </li>
+                @endif
 
-
-                <li class="pcoded-hasmenu">
-                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                        <span class="pcoded-micon"><i class="feather icon-sidebar"></i></span>
-                        <span class="pcoded-mtext">Page layouts</span>
-                    </a>
-                    <ul class="pcoded-submenu">
-                        <li class=" pcoded-hasmenu">
-                            <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                <span class="pcoded-mtext">Vertical</span>
-                            </a>
-                            <ul class="pcoded-submenu">
-                                <li class="">
-                                    <a href="menu-static.html" class="waves-effect waves-dark">
-                                        <span class="pcoded-mtext">Static Layout</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="menu-header-fixed.html" class="waves-effect waves-dark">
-                                        <span class="pcoded-mtext">Header Fixed</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="menu-compact.html" class="waves-effect waves-dark">
-                                        <span class="pcoded-mtext">Compact</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="menu-sidebar.html" class="waves-effect waves-dark">
-                                        <span class="pcoded-mtext">Sidebar Fixed</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class=" pcoded-hasmenu">
-                            <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                <span class="pcoded-mtext">Horizontal</span>
-                            </a>
-                            <ul class="pcoded-submenu">
-                                <li class="">
-                                    <a href="menu-horizontal-static.html" target="_blank" class="waves-effect waves-dark">
-                                        <span class="pcoded-mtext">Static Layout</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="menu-horizontal-fixed.html" target="_blank" class="waves-effect waves-dark">
-                                        <span class="pcoded-mtext">Fixed layout</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="menu-horizontal-icon.html" target="_blank" class="waves-effect waves-dark">
-                                        <span class="pcoded-mtext">Static With Icon</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="menu-horizontal-icon-fixed.html" target="_blank" class="waves-effect waves-dark">
-                                        <span class="pcoded-mtext">Fixed With Icon</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="">
-                            <a href="menu-bottom.html" class="waves-effect waves-dark">
-                                <span class="pcoded-mtext">Bottom Menu</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+{{--                <li class="pcoded-hasmenu">--}}
+{{--                    <a href="javascript:void(0)" class="waves-effect waves-dark">--}}
+{{--                        <span class="pcoded-micon"><i class="feather icon-sidebar"></i></span>--}}
+{{--                        <span class="pcoded-mtext">Page layouts</span>--}}
+{{--                    </a>--}}
+{{--                    <ul class="pcoded-submenu">--}}
+{{--                        <li class=" pcoded-hasmenu">--}}
+{{--                            <a href="javascript:void(0)" class="waves-effect waves-dark">--}}
+{{--                                <span class="pcoded-mtext">Vertical</span>--}}
+{{--                            </a>--}}
+{{--                            <ul class="pcoded-submenu">--}}
+{{--                                <li class="">--}}
+{{--                                    <a href="menu-static.html" class="waves-effect waves-dark">--}}
+{{--                                        <span class="pcoded-mtext">Static Layout</span>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                                <li class="">--}}
+{{--                                    <a href="menu-header-fixed.html" class="waves-effect waves-dark">--}}
+{{--                                        <span class="pcoded-mtext">Header Fixed</span>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                                <li class="">--}}
+{{--                                    <a href="menu-compact.html" class="waves-effect waves-dark">--}}
+{{--                                        <span class="pcoded-mtext">Compact</span>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                                <li class="">--}}
+{{--                                    <a href="menu-sidebar.html" class="waves-effect waves-dark">--}}
+{{--                                        <span class="pcoded-mtext">Sidebar Fixed</span>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                            </ul>--}}
+{{--                        </li>--}}
+{{--                        <li class=" pcoded-hasmenu">--}}
+{{--                            <a href="javascript:void(0)" class="waves-effect waves-dark">--}}
+{{--                                <span class="pcoded-mtext">Horizontal</span>--}}
+{{--                            </a>--}}
+{{--                            <ul class="pcoded-submenu">--}}
+{{--                                <li class="">--}}
+{{--                                    <a href="menu-horizontal-static.html" target="_blank" class="waves-effect waves-dark">--}}
+{{--                                        <span class="pcoded-mtext">Static Layout</span>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                                <li class="">--}}
+{{--                                    <a href="menu-horizontal-fixed.html" target="_blank" class="waves-effect waves-dark">--}}
+{{--                                        <span class="pcoded-mtext">Fixed layout</span>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                                <li class="">--}}
+{{--                                    <a href="menu-horizontal-icon.html" target="_blank" class="waves-effect waves-dark">--}}
+{{--                                        <span class="pcoded-mtext">Static With Icon</span>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                                <li class="">--}}
+{{--                                    <a href="menu-horizontal-icon-fixed.html" target="_blank" class="waves-effect waves-dark">--}}
+{{--                                        <span class="pcoded-mtext">Fixed With Icon</span>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                            </ul>--}}
+{{--                        </li>--}}
+{{--                        <li class="">--}}
+{{--                            <a href="menu-bottom.html" class="waves-effect waves-dark">--}}
+{{--                                <span class="pcoded-mtext">Bottom Menu</span>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
 
             </ul>
 

@@ -1,33 +1,6 @@
 @extends('layouts.app')
 @section('content')
     <div class="pcoded-content">
-        <div class="page-header card">
-            <div class="row align-items-end">
-                <div class="col-lg-8">
-                    <div class="page-header-title">
-                        <i class="feather icon-clipboard bg-c-blue"></i>
-                        <div class="d-inline">
-                            <h5>Forms Validation</h5>
-                            <span>lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="page-header-breadcrumb">
-                        <ul class=" breadcrumb breadcrumb-title">
-                            <li class="breadcrumb-item">
-                                <a href="index.html"><i class="feather icon-home"></i></a>
-                            </li>
-                            <li class="breadcrumb-item"><a href="#!">Form Components</a>
-                            </li>
-                            <li class="breadcrumb-item">
-                                <a href="#!">Forms Validation</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="pcoded-inner-content">
             <div class="main-body">
@@ -141,6 +114,127 @@
                                                 </div>
                                             </div>
 
+                                            <div class="form-group col-sm-6 ">
+
+                                                <div class="card-header ml-4">
+                                                    <h4>Schedule</h4>
+                                                </div>
+
+                                                <div class="form-group row m-l-4">
+                                                    <label class="col-sm-10">select day and time</label>
+
+                                                </div>
+                                                <div class="col-sm-10 ">
+                                                    <div class="m-4">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" name="days[]" id="sunday" value="sunday">
+                                                            <label class="form-check-label" for="sunday"><h5>Sunday</h5></label>
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <label class="form-label" for="">From</label>
+                                                                    <input class="form-control" type="time"  name="from[]" value=""/>                                                            </div>
+                                                                <div class="col-sm-6">
+                                                                    <label class="form-label" for="">To</label>
+                                                                    <input class="form-control" type="time" name="to[]" value=""/>                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="m-4">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" name="days[]" id="monday" value="monday">
+                                                            <label class="form-check-label" for="monday"><h5>monday</h5></label>
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <label class="form-label" for="">From</label>
+                                                                    <input class="form-control" type="time"  name="from[]"/>                                                            </div>
+                                                                <div class="col-sm-6">
+                                                                    <label class="form-label" for="">To</label>
+                                                                    <input class="form-control" type="time" name="to[]"/>                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="m-4">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" name="days[]" id="tuesday" value="tuesday">
+                                                            <label class="form-check-label" for="tuesday"><h5>tuesday</h5></label>
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <label class="form-label" for="">From</label>
+                                                                    <input class="form-control" type="time"  name="from[]"/>                                                            </div>
+                                                                <div class="col-sm-6">
+                                                                    <label class="form-label" for="">To</label>
+                                                                    <input class="form-control" type="time" name="to[]"/>                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="m-4">
+
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" name="days[]" id="wednesday" value="wednesday">
+                                                            <label class="form-check-label" for="wednesday"><h5>wednesday</h5></label>
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <label class="form-label" for="">From</label>
+                                                                    <input class="form-control" type="time"  name="from[]"/>                                                            </div>
+                                                                <div class="col-sm-6">
+                                                                    <label class="form-label" for="sunday">To</label>
+                                                                    <input class="form-control" type="time" name="to[]"/>                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="m-4">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" name="days[]" id="thursday" value="thursday">
+                                                            <label class="form-check-label" for="thursday"><h5>thursday</h5></label>
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <label class="form-label" for="">From</label>
+                                                                    <input class="form-control" type="time"  name="from[]"/>                                                            </div>
+                                                                <div class="col-sm-6">
+                                                                    <label class="form-label" for="friday">To</label>
+                                                                    <input class="form-control" type="time" name="to[]"/>                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="m-4">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" name="days[]" id="friday" value="friday">
+                                                            <label class="form-check-label" for="friday"><h5>friday</h5></label>
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <label class="form-label" for="">From</label>
+                                                                    <input class="form-control" type="time"  name="from[]"/>                                                            </div>
+                                                                <div class="col-sm-6">
+                                                                    <label class="form-label" for="friday">To</label>
+                                                                    <input class="form-control" type="time" name="to[]"/>                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="m-4">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" name="days[]" id="saturday" value="saturday">
+                                                            <label class="form-check-label" for="saturday"><h5>saturday</h5></label>
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <label class="form-label" for="">From</label>
+                                                                    <input class="form-control" type="time"  name="from[]"/>                                                            </div>
+                                                                <div class="col-sm-6">
+                                                                    <label class="form-label" for="">To</label>
+                                                                    <input class="form-control" type="time" name="to[]"/>                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
                                             <div class="form-group row">
                                                 <label class="col-sm-2"></label>
                                                 <div class="col-sm-10">
@@ -153,6 +247,23 @@
                                     </div>
                                 </div>
                             </div>
+{{--                            <div class="col-sm-5">--}}
+{{--                                <div class="card">--}}
+{{--                                    <div class="card-header">--}}
+{{--                                        <h5>Schedule</h5>--}}
+{{--                                        <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="card-block">--}}
+{{--                                        <form id="main" method="post" action="{{route('doctor.store', )}}" >--}}
+{{--                                            {{csrf_field()}}--}}
+
+
+{{--                                            <button type="submit" class="btn btn-primary m-b-0">Submit</button>--}}
+{{--                                        </form>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+
                         </div>
                     </div>
                 </div>

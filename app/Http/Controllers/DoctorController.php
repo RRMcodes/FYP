@@ -40,8 +40,40 @@ class DoctorController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $days = $request->days;
+        $from = $request->from;
+        $to = $request->to;
 
-        $doctor = $request->except(['_token']);
+        $schedule = [];
+
+        foreach ($days as $day){
+            if ($day == "sunday"){
+                $schedule['sunday']['from'] = $from[0];
+                $schedule['sunday']['to'] = $to[0];
+            }elseif ($day == "monday"){
+                $schedule['monday']['from'] = $from[1];
+                $schedule['monday']['to'] = $to[1];
+            }elseif ($day == "tuesday"){
+                $schedule['tuesday']['from'] = $from[2];
+                $schedule['tuesday']['to'] = $to[2];
+            }elseif ($day == "wednesday"){
+                $schedule['wednesday']['from'] = $from[3];
+                $schedule['wednesday']['to'] = $to[3];
+            }elseif ($day == "thursday"){
+                $schedule['thursday']['from'] = $from[4];
+                $schedule['thursday']['to'] = $to[4];
+            }elseif ($day == "friday"){
+                $schedule['friday']['from'] = $from[5];
+                $schedule['friday']['to'] = $to[5];
+            }elseif ($day == "saturday"){
+                $schedule['saturday']['from'] = $from[6];
+                $schedule['saturday']['to'] = $to[6];
+            }
+        }
+
+        $request['schedule'] = json_encode($schedule);
+        $doctor = $request->except(['_token', 'days', 'from', 'to']);
+
         Doctor::create($doctor);
         return redirect()->route('doctor.index')->with('success', 'Doctor created successfully.');
     }
@@ -79,6 +111,39 @@ class DoctorController extends Controller
     public function update(Request $request): RedirectResponse
     {
         $doctor = $request->except(['_token']);
+
+        $days = $request->days;
+        $from = $request->from;
+        $to = $request->to;
+
+        $schedule = [];
+
+     foreach ($days as $day){
+         if ($day == "sunday"){
+             $schedule['sunday']['from'] = $from[0];
+             $schedule['sunday']['to'] = $to[0];
+         }elseif ($day == "monday"){
+             $schedule['monday']['from'] = $from[1];
+             $schedule['monday']['to'] = $to[1];
+         }elseif ($day == "tuesday"){
+             $schedule['tuesday']['from'] = $from[2];
+             $schedule['tuesday']['to'] = $to[2];
+         }elseif ($day == "wednesday"){
+             $schedule['wednesday']['from'] = $from[3];
+             $schedule['wednesday']['to'] = $to[3];
+         }elseif ($day == "thursday"){
+             $schedule['thursday']['from'] = $from[4];
+             $schedule['thursday']['to'] = $to[4];
+         }elseif ($day == "friday"){
+             $schedule['friday']['from'] = $from[5];
+             $schedule['friday']['to'] = $to[5];
+         }elseif ($day == "saturday"){
+             $schedule['saturday']['from'] = $from[6];
+             $schedule['saturday']['to'] = $to[6];
+         }
+     }
+        $doctor['schedule'] = json_encode($schedule);
+
         Doctor::find($request->id)
             ->update($doctor);
         return redirect()->route('doctor.index')->with('success', 'Doctor updated successfully.');

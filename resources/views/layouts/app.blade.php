@@ -49,6 +49,12 @@
 
     <link rel="stylesheet" type="text/css" href="{{asset('css/billing.css')}}">
 
+    <link rel="stylesheet" type="text/css" href="{{asset('template/css/bootstrap-datetimepicker.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('template/css/daterangepicker.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('template/css/datedropper.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('template/css/spectrum.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('template/css/jquery.minicolors.css')}}">
+
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -162,6 +168,20 @@
 <script src="{{asset('template/js/amcharts.js')}}" type="text/javascript"></script>
 <script src="{{asset('template/js/serial.js')}}" type="text/javascript"></script>
 <script src="{{asset('template/js/light.js')}}" type="text/javascript"></script>
+<script src="{{asset('template/js/modernizr.js')}}" type="text/javascript"></script>
+<script src="{{asset('template/js/css-scrollbars.js')}}" type="text/javascript"></script>
+<script src="{{asset('template/js/moment-with-locales.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('template/js/bootstrap-datepicker.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('template/js/bootstrap-datetimepicker.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('template/js/daterangepicker.js')}}" type="text/javascript"></script>
+<script src="{{asset('template/js/datedropper.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('template/js/datedropper.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('template/js/spectrum.js')}}" type="text/javascript"></script>
+<script src="{{asset('template/js/jscolor.js')}}" type="text/javascript"></script>
+<script src="{{asset('template/js/jquery.minicolors.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('template/js/custom-picker.js')}}" type="text/javascript"></script>
+
+
 
 <script src="{{asset('template/js/pcoded.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('template/js/vertical-layout.min.js')}}" type="text/javascript"></script>
