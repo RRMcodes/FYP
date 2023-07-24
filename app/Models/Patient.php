@@ -22,4 +22,9 @@ class Patient extends Model
          "blood_group" ,
          "gender"
     ];
+
+    public function getFullName()
+    {
+        return "{$this->f_name} {$this->l_name}";
+    }
 }

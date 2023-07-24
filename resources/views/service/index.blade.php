@@ -29,7 +29,7 @@
                                                     <h4 style="text-align: center;margin: 10%"> Sorry, No services records to show</h4>
 
                                                 @else
-                                                <table class="table table-striped table-bordered nowrap" id="myTable">
+                                                    <table class="table table-striped " id="myTable" width="100%">
                                                     <thead>
                                                     <tr>
                                                         <td>Sno</td>

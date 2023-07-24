@@ -27,4 +27,9 @@ class Staff extends Model
         "start_date",
         "end_date",
     ];
+
+    public function getFullName()
+    {
+        return "{$this->f_name} {$this->l_name}";
+    }
 }

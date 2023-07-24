@@ -28,4 +28,9 @@ class Doctor extends Model
         "end_date",
         "schedule"
     ];
+
+    public function getFullName()
+    {
+        return "{$this->f_name} {$this->l_name}";
+    }
 }
