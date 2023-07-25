@@ -40,6 +40,25 @@
 
                 @if (Auth::user()->role == 'staff' || Auth::user()->role == 'admin')
 
+                    <li class="pcoded-hasmenu {{(str_contains(url()->current(), 'event/') ? 'active pcoded-trigger' : '' )}}">
+                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                            <span class="pcoded-micon"><i class="fa-solid fa-calendar-day fa-lg"></i></span>
+                            <span class="pcoded-mtext">Events</span>
+                        </a>
+                        <ul class="pcoded-submenu">
+                            <li class="{{(str_contains(url()->current(), 'event/index') ? 'active' : '' )}}">
+                                <a href="{{route('event.index')}}" class="waves-effect waves-dark ">
+                                    <span class="pcoded-mtext">View Events</span>
+                                </a>
+                            </li>
+                            <li class="{{(str_contains(url()->current(), 'event/eventLog') ? 'active' : '' )}}">
+                                <a href="{{route('event.eventLog')}}" class="waves-effect waves-dark ">
+                                    <span class="pcoded-mtext">Event Log</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                 <li class="pcoded-hasmenu {{(str_contains(url()->current(), 'item/') ? 'active pcoded-trigger' : '' )}}">
                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                         <span class="pcoded-micon"><i class="fa-solid fa-warehouse"></i></span>

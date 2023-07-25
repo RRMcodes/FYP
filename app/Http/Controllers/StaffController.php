@@ -26,7 +26,7 @@ class StaffController extends Controller
      */
     public function create()
     {
-        return view('staff.create');
+        return view('staff.create2');
     }
 
     /**
@@ -37,8 +37,16 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-
         $staff = $request->except(['_token']);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time().'-'.$request->f_name.'.' . $image->extension();
+            $image->move(public_path('images'), $imageName);
+
+            // You can save the $imageName to your database or perform any other required actions.
+        }
+        $staff['image'] = $imageName;
         Staff::create($staff);
         return redirect()->route('staff.index')->with('success', 'Staff created successfully.');
     }
@@ -64,7 +72,7 @@ class StaffController extends Controller
     public function edit($id)
     {
         $staff = Staff::find($id);
-        return view('staff.edit')->with(compact('staff'));
+        return view('staff.edit2')->with(compact('staff'));
     }
 
     /**
@@ -80,7 +88,6 @@ class StaffController extends Controller
         Staff::find($request->id)
             ->update($staff);
         return redirect()->route('staff.index')->with('success', 'Staff updated successfully.');
-
     }
 
     /**

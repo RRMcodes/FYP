@@ -19,6 +19,7 @@
                                     <form id="main" method="post" action="{{route('staff.update',["id"=>$staff->id] )}}" >
                                         {{csrf_field()}}
 
+                                        <img src="{{asset('images/'.$staff->image )}}">
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">First name</label>
                                             <div class="col-sm-10">

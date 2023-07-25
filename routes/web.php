@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\BillingController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PatientController;
@@ -103,7 +104,19 @@ Route::middleware(['auth','verified'])->controller(ItemController::class)->group
     Route::any('/item/delete/{id}','destroy')->name('item.delete');
     Route::post('/item/getItemsJson','getItemsJson')->name('item.getItemsJson');
     Route::get('/item/itemLog','itemLog')->name('item.itemLog');
+});
 
+Route::middleware(['auth','verified'])->controller(EventController::class)->group(function (){
+    Route::get('/event/create','create')->name('event.create');
+    Route::post('/event/store','store')->name('event.store');
+    Route::get('/event/index','index')->name('event.index');
+    Route::get('/event/edit/{id}','edit')->name('event.edit');
+    Route::get('/event/show/{id}','show')->name('event.show');
+    Route::post('/event/update','update')->name('event.update');
+    Route::any('/event/delete/{id}','destroy')->name('event.delete');
+    Route::post('/event/getEventsJson','getEventsJson')->name('event.getEventsJson');
+    Route::get('/event/eventLog','eventLog')->name('event.eventLog');
+    Route::get('/event/sendMail/{id}','sendMail')->name('event.sendMail');
 });
 
 Route::middleware(['auth','verified','staff'])->controller(BillingController::class)->group(function (){

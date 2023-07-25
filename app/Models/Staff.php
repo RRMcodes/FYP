@@ -26,6 +26,7 @@ class Staff extends Model
         "experience",
         "start_date",
         "end_date",
+        "image"
     ];
 
     public function getFullName()
