@@ -9,14 +9,14 @@
                             <div class="col-sm-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Item Log</h4>
+                                        <h4>Event Log</h4>
                                         {{--                                        <div class="card-header-right"> <ul class="list-unstyled card-option"> <li class="first-opt"><i class="feather icon-chevron-left open-card-option"></i></li> <li><i class="feather icon-maximize full-card"></i></li> <li><i class="feather icon-minus minimize-card"></i></li> <li><i class="feather icon-refresh-cw reload-card"></i></li> <li><i class="feather icon-trash close-card"></i></li> <li><i class="feather icon-chevron-left open-card-option"></i></li> </ul> </div>--}}
                                     </div>
                                     <div class="card-block table-border-style">
 
                                         <div class="dt-responsive table-responsive">
 
-                                            @if (count($itemLogs)===0)
+                                            @if (count($eventLogs)===0)
                                                 <h4 style="text-align: center;margin: 10%"> Sorry, No billing records to show</h4>
 
                                             @else
@@ -24,26 +24,23 @@
                                                     <thead>
                                                     <tr>
                                                         <td>Sno</td>
-                                                        <td>Billing ID</td>
-                                                        <td>Item Name</td>
-                                                        <td>Quantity</td>
-                                                        <td>status</td>
-                                                        <td>Actions</td>
+                                                        <td>Event ID</td>
+                                                        <td>Event Name</td>
+                                                        <td>Start Date</td>
+                                                        <td>Event Date</td>
+                                                        <td>Notification Date</td>
                                                     </tr>
                                                     </thead>
 
                                                     <tbody>
-                                                    @foreach($itemLogs as $key=>$itemLog)
+                                                    @foreach($eventLogs as $key=>$eventLog)
                                                         <tr>
                                                             <td>{{$key+1}}</td>
-                                                            <td>{{$itemLog->billing_id}}</td>
-                                                            <td>{{$item->where('id', $itemLog->item_id)->first()->name}}</td>
-                                                            <td>{{$itemLog->quantity}}</td>
-                                                            <td>{{$itemLog->status}}</td>
-                                                            <td>
-                                                                <a href="" class="btn btn-primary"><i class="fa-solid fa-info"></i></a>
-
-                                                            </td>
+                                                            <td>{{$eventLog->event_id}}</td>
+                                                            <td>{{$eventLog->event_name}}</td>
+                                                            <td>{{$eventLog->start_date}}</td>
+                                                            <td>{{$eventLog->end_date}}</td>
+                                                            <td>{{$eventLog->date}}</td>
                                                         </tr>
                                                     @endforeach
                                                     </tbody>

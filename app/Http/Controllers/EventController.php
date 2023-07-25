@@ -128,6 +128,15 @@ class EventController extends Controller
 
         $emails = Arr::pluck($patients, 'email');
         Mail::to($emails)->send(new EventMail($event));
+
+        EventLog::create([
+            'event_id'  =>  $event->id,
+            'event_name'  =>  $event->name,
+            'date'  =>  date('Y-m-d H:i:s'),
+            'start_date'  =>  $event->start_date,
+            'end_date'  =>  $event->end_date,
+
+        ]);
         return redirect()->route('event.index');
     }
 
