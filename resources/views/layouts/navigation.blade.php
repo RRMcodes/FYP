@@ -38,9 +38,25 @@
 
 
 
+
+
                 @if (Auth::user()->role == 'staff' || Auth::user()->role == 'admin')
 
-                    <li class="pcoded-hasmenu {{(str_contains(url()->current(), 'event/') ? 'active pcoded-trigger' : '' )}}">
+                    <li class="pcoded-hasmenu {{(str_contains(url()->current(), 'report') ? 'active pcoded-trigger' : '' )}}">
+                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                            <span class="pcoded-micon"><i class="fa-solid fa-file-waveform"></i></span>
+                            <span class="pcoded-mtext">Reports</span>
+                        </a>
+                        <ul class="pcoded-submenu">
+                            <li class="{{(str_contains(url()->current(), 'report/index') ? 'active' : '' )}}">
+                                <a href="{{route('report.index')}}" class="waves-effect waves-dark ">
+                                    <span class="pcoded-mtext">View Reports</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="pcoded-hasmenu {{(str_contains(url()->current(), 'event') ? 'active pcoded-trigger' : '' )}}">
                         <a href="javascript:void(0)" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="fa-solid fa-calendar-day fa-lg"></i></span>
                             <span class="pcoded-mtext">Events</span>

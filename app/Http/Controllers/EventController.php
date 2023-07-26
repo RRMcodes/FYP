@@ -60,7 +60,7 @@ class EventController extends Controller
         $event['start_time'] = Carbon::parse($event['start_time'])->format('h:i A');
         $event['end_time'] = Carbon::parse($event['end_time'])->format('h:i A');
         Event::create($event);
-        return redirect()->route('event.index')->with('success', 'Event created successfully.');
+        return redirect()->route('event.index')->with('message', 'Event created successfully.');
     }
 
     /**
@@ -104,7 +104,7 @@ class EventController extends Controller
         $new_event['end_time'] = Carbon::parse($new_event['end_time'])->format('h:i A');
 
         Event::find($request->id)->update($new_event);
-        return redirect()->route('event.index')->with('success', 'Event updated successfully.');
+        return redirect()->route('event.index')->with('message', 'Event updated successfully.');
 
     }
 
@@ -119,7 +119,7 @@ class EventController extends Controller
         $event = Event::find($id);
         $event->delete();
 
-        return redirect()->route('event.index')->with('success', 'Event deleted successfully.');
+        return redirect()->route('event.index')->with('message', 'Event deleted successfully.');
     }
 
     public function sendMail($id){
@@ -137,7 +137,7 @@ class EventController extends Controller
             'end_date'  =>  $event->end_date,
 
         ]);
-        return redirect()->route('event.index');
+        return redirect()->route('event.index')->with('message','Mail send successfully');
     }
 
 }

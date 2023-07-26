@@ -52,7 +52,7 @@ class ItemController extends Controller
 
         $item = $request->except(['_token']);
         Item::create($item);
-        return redirect()->route('item.index')->with('success', 'Item created successfully.');
+        return redirect()->route('item.index')->with('message', 'Item created successfully.');
     }
 
     /**
@@ -108,7 +108,7 @@ class ItemController extends Controller
 
 
         Item::find($request->id)->update($new_item);
-        return redirect()->route('item.index')->with('success', 'Item updated successfully.');
+        return redirect()->route('item.index')->with('message', 'Item updated successfully.');
 
     }
 
@@ -123,6 +123,6 @@ class ItemController extends Controller
         $item = Item::find($id);
         $item->delete();
 
-        return redirect()->route('item.index')->with('success', 'Item deleted successfully.');
+        return redirect()->route('item.index')->with('message', 'Item deleted successfully.');
     }
 }

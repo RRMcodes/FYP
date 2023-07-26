@@ -50,7 +50,7 @@ class ServiceController extends Controller
 
         $service = $request->except(['_token']);
         Service::create($service);
-        return redirect()->route('service.index')->with('success', 'Service created successfully.');
+        return redirect()->route('service.index')->with('message', 'Test created successfully.');
     }
 
     /**
@@ -89,7 +89,7 @@ class ServiceController extends Controller
         $service = $request->except(['_token']);
         Service::find($request->id)
             ->update($service);
-        return redirect()->route('service.index')->with('success', 'Service updated successfully.');
+        return redirect()->route('service.index')->with('message', 'Test updated successfully.');
 
     }
 
@@ -104,6 +104,6 @@ class ServiceController extends Controller
         $service = Service::find($id);
         $service->delete();
 
-        return redirect()->route('service.index')->with('success', 'Service deleted successfully.');
+        return redirect()->route('service.index')->with('message', 'Test deleted successfully.');
     }
 }

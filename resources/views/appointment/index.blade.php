@@ -1,5 +1,15 @@
 @extends('layouts.app')
 @section('content')
+{{--    @if (Session::has('message'))--}}
+{{--        <div class="alert alert-success background-danger" style="position: absolute">--}}
+{{--            <div>--}}
+{{--            {{Session::get('message') }}--}}
+{{--            </div>--}}
+{{--            <button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
+{{--                <i class="icofont icofont-close-line-circled text-white"></i>--}}
+{{--            </button>--}}
+{{--        </div>--}}
+{{--    @endif--}}
     <div class="pcoded-content">
         <div class="pcoded-inner-content">
             <div class="main-body">

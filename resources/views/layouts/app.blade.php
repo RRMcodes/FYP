@@ -5,7 +5,15 @@
 <!-- Mirrored from colorlib.com/polygon/admindek/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Dec 2019 16:07:52 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
-    <title>Admindek | Admin Template</title>
+    <title>E-Clinic</title>
+    <style>
+        .alert{
+            position: absolute;
+            right: 0;
+            z-index: 1;
+        }
+
+    </style>
 
     <script type="text/javascript" src="{{asset('template/js/jquery.min.js')}}"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -73,6 +81,9 @@
 </head>
 <body themebg-pattern="theme1">
 
+
+
+
 <div class="loader-bg">
     <div class="loader-bar"></div>
 </div>
@@ -92,7 +103,18 @@
 
                 @include('layouts.navigation')
 
+                @if (Session::has('message'))
+                    <div class="alert alert-success background-danger" style="position: absolute">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
+                            <i class="icofont icofont-close-line-circled text-white"></i>
+                        </button>
+                        {{Session::get('message') }}
+
+                    </div>
+                @endif
                 @yield('content')
+
+
 
 
                 <div id="styleSelector">
@@ -147,6 +169,14 @@
     <p>Sorry for the inconvenience!</p>
 </div>
 <![endif]-->
+<script type="text/javascript">
+    setTimeout(function() {
+        $('.alert').fadeOut(1000, function() {
+            $(this).alert('close');
+        });
+
+    }, 4000);
+</script>
 
 
 <script data-cfasync="false" src="{{asset('template/js/email-decode.min.js')}}"></script>

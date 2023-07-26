@@ -3,6 +3,7 @@
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PatientController;
@@ -104,6 +105,19 @@ Route::middleware(['auth','verified'])->controller(ItemController::class)->group
     Route::any('/item/delete/{id}','destroy')->name('item.delete');
     Route::post('/item/getItemsJson','getItemsJson')->name('item.getItemsJson');
     Route::get('/item/itemLog','itemLog')->name('item.itemLog');
+});
+
+Route::middleware(['auth','verified'])->controller(ReportController::class)->group(function (){
+    Route::get('/report/create','create')->name('report.create');
+    Route::post('/report/store','store')->name('report.store');
+    Route::get('/report/index','index')->name('report.index');
+    Route::get('/report/edit/{id}','edit')->name('report.edit');
+    Route::get('/report/show/{id}','show')->name('report.show');
+    Route::post('/report/update','update')->name('report.update');
+    Route::any('/report/delete/{id}','destroy')->name('report.delete');
+    Route::post('/report/getReportsJson','getReportsJson')->name('report.getReportsJson');
+    Route::get('/report/reportLog','reportLog')->name('report.reportLog');
+    Route::get('/report/sendMail/{id}','sendMail')->name('report.sendMail');
 });
 
 Route::middleware(['auth','verified'])->controller(EventController::class)->group(function (){

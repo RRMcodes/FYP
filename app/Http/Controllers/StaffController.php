@@ -48,7 +48,7 @@ class StaffController extends Controller
         }
         $staff['image'] = $imageName;
         Staff::create($staff);
-        return redirect()->route('staff.index')->with('success', 'Staff created successfully.');
+        return redirect()->route('staff.index')->with('message', 'Staff record created successfully.');
     }
 
     /**
@@ -87,7 +87,7 @@ class StaffController extends Controller
         $staff = $request->except(['_token']);
         Staff::find($request->id)
             ->update($staff);
-        return redirect()->route('staff.index')->with('success', 'Staff updated successfully.');
+        return redirect()->route('staff.index')->with('message', 'Staff record updated successfully.');
     }
 
     /**
@@ -101,6 +101,6 @@ class StaffController extends Controller
         $staff = Staff::find($id);
         $staff->delete();
 
-        return redirect()->route('staff.index')->with('success', 'Staff deleted successfully.');
+        return redirect()->route('staff.index')->with('message', 'Staff record deleted successfully.');
     }
 }

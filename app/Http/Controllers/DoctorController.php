@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AppointmentMail;
+use App\Mail\AppointmentRescheduleMail;
+use App\Models\Appointment;
 use App\Models\Doctor;
+use App\Models\Patient;
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Mail;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class DoctorController extends Controller
 {
@@ -75,7 +84,7 @@ class DoctorController extends Controller
         $doctor = $request->except(['_token', 'days', 'from', 'to']);
 
         Doctor::create($doctor);
-        return redirect()->route('doctor.index')->with('success', 'Doctor created successfully.');
+        return redirect()->route('doctor.index')->with('message', 'Record created successfully.');
     }
 
     /**
@@ -110,15 +119,57 @@ class DoctorController extends Controller
      */
     public function update(Request $request): RedirectResponse
     {
+        $record = Doctor::findOrFail($request->id);
+        $old_schedule = (json_decode($record->schedule,true));
+        $currentDate = Carbon::today()->toDateString();
+        $appointments = Appointment::join('patient', 'appointments.patient_id', '=', 'patient.id')
+            ->where('doctor_id',$request->id)
+            ->whereDate('appointment_date', '>=', $currentDate)->get()->toArray();
+
         $doctor = $request->except(['_token']);
 
         $days = $request->days;
         $from = $request->from;
         $to = $request->to;
 
-        $schedule = [];
+        foreach ($days as $index=>$day){
+//dd($old_schedule[$day]['from'],$from[$index],$old_schedule[$day]['to'],$to[$index]);
+            if (array_keys($old_schedule)[$index] == $day) {
+                if ($old_schedule[$day]['from'] != $from[$index] || $old_schedule[$day]['to'] != $to[$index]) {
+                    $changed[$index] = $day;
+                }
+            }
+        }
 
-     foreach ($days as $day){
+       foreach ($changed as $index=>$day){
+           $filtered_appointments = Arr::where($appointments, function($key, $value) use ($day)
+           {
+               $date = new DateTime($key['appointment_date']);
+               $dayOfWeek = $date->format('l');
+               if (strtolower($dayOfWeek) == $day){
+                   return $key;
+               }
+           });
+
+           if (count($filtered_appointments) > 0) {
+               foreach ($filtered_appointments as $filtered_appointment)  {
+
+                   $data = [
+                       'patientName'  => $filtered_appointment['f_name'],
+                       'specialist' => $record->specialization,
+                       'doctorName' => $record->getFullName(),
+                       'day' => $days[$index],
+                       'date'  => $filtered_appointment['appointment_date'],
+                       'from' => Carbon::parse($from[$index])->format('h:i A'),
+                       'to' =>  Carbon::parse($to[$index])->format('h:i A')
+                   ];
+                   Mail::to($filtered_appointment['email'])->send(new AppointmentRescheduleMail($data));
+               }
+           }
+       }
+
+        $schedule = [];
+     foreach ($days as $index=>$day){
          if ($day == "sunday"){
              $schedule['sunday']['from'] = $from[0];
              $schedule['sunday']['to'] = $to[0];
@@ -146,7 +197,7 @@ class DoctorController extends Controller
 
         Doctor::find($request->id)
             ->update($doctor);
-        return redirect()->route('doctor.index')->with('success', 'Doctor updated successfully.');
+        return redirect()->route('doctor.index')->with('message', 'Record updated successfully.');
 
     }
 
@@ -161,6 +212,6 @@ class DoctorController extends Controller
         $doctor = Doctor::find($id);
         $doctor->delete();
 
-        return redirect()->route('doctor.index')->with('success', 'Doctor deleted successfully.');
+        return redirect()->route('doctor.index')->with('message', 'Record deleted successfully.');
     }
 }

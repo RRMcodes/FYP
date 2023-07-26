@@ -91,7 +91,7 @@ class BillingController extends Controller
             }
         }
         ItemLog::insert($item_collection);
-        return redirect()->route('billing.index');
+        return redirect()->route('billing.index')->with('message','Invoice generated successfully');
     }
 
 
@@ -121,7 +121,7 @@ class BillingController extends Controller
             }
         }
         ServiceLog::insert($service_collection);
-        return redirect()->route('billing.index');
+        return redirect()->route('billing.index')->with('message','Invoice generated successfully');
     }
 
     /**

@@ -3,6 +3,7 @@
 
 
 
+
         <div class="pcoded-content">
 
             <div class="pcoded-inner-content">
@@ -15,49 +16,44 @@
                                 <div class="col-sm-12">
                                      <div class="card">
                                             <div class="card-header">
-                                                <h5>Event Details</h5>
+                                                <h5>Report Details</h5>
                                                 <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>
                                             </div>
 
                                             <div class="card-header">
-                                            <a href="{{route('event.create')}}" class="btn btn-primary" action="">Add Events</a>
+                                            <a href="{{route('report.create')}}" class="btn btn-primary" action="">Add Reports</a>
                                         </div>
                                         <div class="card-block">
                                             <div class="dt-responsive table-responsive">
 
-                                                @if (count($events)===0)
-                                                    <h4 style="text-align: center;margin: 10%"> Sorry, No events records to show</h4>
+                                                @if (count($reports)===0)
+                                                    <h4 style="text-align: center;margin: 10%"> Sorry, No reports records to show</h4>
 
                                                 @else
                                                     <table class="table table-striped " id="myTable" width="100%" >
                                                     <thead>
                                                     <tr>
                                                         <td>Sno</td>
-                                                        <td>Name</td>
-                                                        <td>Start Date</td>
-                                                        <td>End Date</td>
-                                                        <td>Location</td>
-                                                        <td>Start Time</td>
-                                                        <td>End Time</td>
+                                                        <td>Patient ID</td>
+                                                        <td>Test</td>
+                                                        <td>File</td>
+                                                        <td>Status</td>
                                                         <td>Actions</td>
                                                     </tr>
                                                     </thead>
 
                                                     <tbody>
-                                                    @foreach($events as $key=>$event)
+                                                    @foreach($reports as $key=>$report)
                                                         <tr>
                                                             <td>{{$key+1}}</td>
-                                                            <td>{{$event->name}}</td>
-                                                            <td>{{$event->start_date}}</td>
-                                                            <td>{{$event->end_date}}</td>
-                                                            <td>{{$event->location}}</td>
-                                                            <td>{{$event->start_time}}</td>
-                                                            <td>{{$event->end_time}}</td>
-
+                                                            <td>{{$report->f_name}} {{$report->l_name}}</td>
+                                                            <td>{{$report->test_name}} ({{$report->abbreviation}})</td>
+                                                            <td>{{$report->file}}</td>
+                                                            <td>{{$report->status}}</td>
                                                             <td>
-                                                                <a href="{{route('event.sendMail',['id'=>$event->id])}}" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></a>
-                                                                <a href="{{route('event.edit',['id'=>$event->id])}}" class="btn btn-secondary"><i class="fa fa-edit"></i></a>
-                                                                <a href="{{route('event.delete',['id'=>$event->id])}}" class="btn btn-danger"><i class="fa fa-trash " aria-hidden="true"></i></a>
+                                                                <a href="{{route('report.sendMail',['id'=>$report->id])}}" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></a>
+                                                                <a href="{{asset('reports/'.$report->file)}}" class="btn btn-secondary"><i class="fa-solid fa-info"></i></a>
+                                                                <a href="{{route('report.delete',['id'=>$report->id])}}" class="btn btn-danger"><i class="fa fa-trash " aria-hidden="true"></i></a>
                                                             </td>
                                                         </tr>
                                                     @endforeach

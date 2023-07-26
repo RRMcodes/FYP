@@ -47,7 +47,7 @@ class AppointmentController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Application|Factory|View
+     * @return \Illuminate\Http\RedirectResponse
      * @throws Exception
      */
     public function store(Request $request)
@@ -81,7 +81,7 @@ class AppointmentController extends Controller
             'specialist'    =>  $request->specialist,
             'appointment_date'    =>  $request->date,
         ]);
-        return redirect()->route('appointment.index');
+        return redirect()->route('appointment.index')->with('message','The appointment has been booked');
     }
 
     /**

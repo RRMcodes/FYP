@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     <div class="page-body">
-                        <form method="post" action="{{ route('staff.update') }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('staff.update',['id'=>$staff->id]) }}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-sm-12">

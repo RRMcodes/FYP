@@ -39,14 +39,14 @@ class PatientController extends Controller
 
         $patient = $request->except(['_token']);
         Patient::create($patient);
-        return redirect()->route('patient.index')->with('success', 'Patient created successfully.');
+        return redirect()->route('patient.index')->with('message', 'Patient record created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show($id)
     {
@@ -78,7 +78,7 @@ class PatientController extends Controller
         $patient = $request->except(['_token']);
         Patient::find($request->id)
             ->update($patient);
-        return redirect()->route('patient.index')->with('success', 'Patient updated successfully.');
+        return redirect()->route('patient.index')->with('message', 'Patient record updated successfully.');
 
     }
 
@@ -93,6 +93,6 @@ class PatientController extends Controller
         $patient = Patient::find($id);
         $patient->delete();
 
-        return redirect()->route('patient.index')->with('success', 'Patient deleted successfully.');
+        return redirect()->route('patient.index')->with('message', 'Patient record deleted successfully.');
     }
 }

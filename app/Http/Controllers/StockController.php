@@ -47,7 +47,7 @@ class StockController extends Controller
             'quantity' => $request->openingbalance ?? 0
         ]);
 
-        return redirect('stock/viewStockledger/' . $request->stockname)->with('success', 'New stock added successfully');
+        return redirect('stock/viewStockledger/' . $request->stockname)->with('Message', 'New stock added successfully');
     }
     public function stockSales(Request $request)
     {
@@ -63,7 +63,7 @@ class StockController extends Controller
             'receipt_no' => $request->billno,
             'issued_quantity' => $request->issuedquantity
         ]);
-        return redirect('stock/viewStockledger/' . $request->productname)->with('success', 'Sales of goods recorded successfully');
+        return redirect('stock/viewStockledger/' . $request->productname)->with('message', 'Sales of goods recorded successfully');
     }
     public function stockPurchase(Request $request)
     {
@@ -83,7 +83,7 @@ class StockController extends Controller
         $stockInformation->purchase_price = $request->rate;
         $stockInformation->save();
 
-        return redirect('stock/viewStockledger/' . $request->productname)->with('success', 'Purchase of goods recorded successfully');
+        return redirect('stock/viewStockledger/' . $request->productname)->with('message', 'Purchase of goods recorded successfully');
     }
     public function viewStockLedger($stockname)
     {
@@ -114,7 +114,7 @@ class StockController extends Controller
             'sales_price' => $request->purchaseprice ?? 0
         ]);
         $stockDetail->stockRemainingBalance()->increment('quantity', $request->openingbalance);
-        return redirect('stock/viewStockledger/' . $request->stockname)->with('success', 'Purchase of goods recorded successfully');
+        return redirect('stock/viewStockledger/' . $request->stockname)->with('message', 'Purchase of goods recorded successfully');
     }
     public function editStockLedgerDetails($id, $stockname)
     {
