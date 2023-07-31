@@ -79,21 +79,42 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Specialization</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="position" name="specialization" value="{{$doctor->specialization}}" placeholder="" required>
+{{--                                                    <input type="text" class="form-control" id="position" name="specialization" value="{{$doctor->specialization}}" placeholder="" required>--}}
+                                                    <select class="form-control form-select col-sm-6" aria-label="Default select example" name="specialization" id="specialization" required>
+                                                        <option >--select--</option>
+                                                        <option value="cardiologist" {{ $doctor->specialization == 'cardiologist' ? 'selected' : '' }}>Cardiologist</option>
+                                                        <option value="dermatologist" {{ $doctor->specialization == 'dermatologist' ? 'selected' : '' }}>Dermatologist</option>
+                                                        <option value="dermatologist" {{ $doctor->specialization == 'ent specialist' ? 'selected' : '' }}>ENT Specialist</option>
+                                                        <option value="dermatologist" {{ $doctor->specialization == 'rheumatologist' ? 'selected' : '' }}>Rheumatologist</option>
+                                                        <option value="dermatologist" {{ $doctor->specialization == 'gynecologist' ? 'selected' : '' }}>Gynecologist</option>
+                                                        <option value="gastroenterologist" {{ $doctor->specialization == 'gastroenterologist' ? 'selected' : '' }}>Gastroenterologist</option>
+                                                        <option value="neurologist" {{ $doctor->specialization == 'neurologist' ? 'selected' : '' }}>Neurologist</option>
+                                                        <option value="neurologist" {{ $doctor->specialization == 'nephrologist' ? 'selected' : '' }}>Nephrologist</option>
+                                                        <option value="ophthalmologist" {{ $doctor->specialization == 'ophthalmologist' ? 'selected' : '' }}>Ophthalmologist</option>
+                                                        <option value="orthopedic" {{ $doctor->specialization == 'orthopedic' ? 'selected' : '' }}>Orthopedic Surgeon</option>
+                                                        <option value="pediatrician" {{ $doctor->specialization == 'pediatrician' ? 'selected' : '' }}>Pediatrician</option>
+                                                        <option value="psychiatrist" {{ $doctor->specialization == 'psychiatrist' ? 'selected' : '' }}>Psychiatrist</option>
+                                                    </select>
+
                                                     <span class="messages"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Status</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="status" name="status" value="{{$doctor->status}}" placeholder="" required>
+{{--                                                    <input type="text" class="form-control" id="status" name="status" value="{{$doctor->status}}" placeholder="" required>--}}
+                                                    <select class="form-control form-select col-sm-6" aria-label="Default select example" name="status" id="status" required>
+                                                        <option value="part-time" {{ $doctor->status == 'part-time' ? 'selected' : '' }}>Part-time</option>
+                                                        <option value="full-time" {{ $doctor->status == 'full-time' ? 'selected' : '' }}>Full-time</option>
+                                                    </select>
+
                                                     <span class="messages"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Experience</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="experience" name="experience" value="{{$doctor->experience}}" placeholder="" required>
+                                                <div class="col-sm-4">
+                                                    <input type="number" class="form-control" id="experience" name="experience" value="{{$doctor->experience}}" placeholder="" required>
                                                     <span class="messages"></span>
                                                 </div>
                                             </div>

@@ -21,7 +21,10 @@
                                             </div>
 
                                             <div class="card-header">
-                                            <a href="{{route('report.create')}}" class="btn btn-primary" action="">Add Reports</a>
+                                                @if(\Illuminate\Support\Facades\Auth::user()->role == 'staff')
+
+                                                <a href="{{route('report.create')}}" class="btn btn-primary" action="">Add Reports</a>
+                                                @endif
                                         </div>
                                         <div class="card-block">
                                             <div class="dt-responsive table-responsive">
@@ -51,9 +54,13 @@
                                                             <td>{{$report->file}}</td>
                                                             <td>{{$report->status}}</td>
                                                             <td>
-                                                                <a href="{{route('report.sendMail',['id'=>$report->id])}}" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></a>
                                                                 <a href="{{asset('reports/'.$report->file)}}" class="btn btn-secondary"><i class="fa-solid fa-info"></i></a>
-                                                                <a href="{{route('report.delete',['id'=>$report->id])}}" class="btn btn-danger"><i class="fa fa-trash " aria-hidden="true"></i></a>
+
+                                                            @if(\Illuminate\Support\Facades\Auth::user()->role == 'staff')
+                                                                <a href="{{route('report.sendMail',['id'=>$report->id])}}" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></a>
+                                                                    <a href="{{route('report.delete',['id'=>$report->id])}}" class="btn btn-danger"><i class="fa fa-trash " aria-hidden="true"></i></a>
+
+                                                                @endif
                                                             </td>
                                                         </tr>
                                                     @endforeach

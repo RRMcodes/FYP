@@ -96,7 +96,7 @@
                                                     </tbody>
                                                 </table>
 
-                                                <button type="button" class="btn btn-primary" id="addItemBtn">Add Item</button>
+                                                <button type="button" class="btn btn-primary" id="addItemBtn">Add Test</button>
                                             </div>
 
                                             <div class=" col-sm-12 text-right">

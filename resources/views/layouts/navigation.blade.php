@@ -40,7 +40,6 @@
 
 
 
-                @if (Auth::user()->role == 'staff' || Auth::user()->role == 'admin')
 
                     <li class="pcoded-hasmenu {{(str_contains(url()->current(), 'report') ? 'active pcoded-trigger' : '' )}}">
                         <a href="javascript:void(0)" class="waves-effect waves-dark">
@@ -55,6 +54,8 @@
                             </li>
                         </ul>
                     </li>
+
+                @if (Auth::user()->role == 'staff' || Auth::user()->role == 'admin')
 
                     <li class="pcoded-hasmenu {{(str_contains(url()->current(), 'event') ? 'active pcoded-trigger' : '' )}}">
                         <a href="javascript:void(0)" class="waves-effect waves-dark">
@@ -102,12 +103,12 @@
                     <ul class="pcoded-submenu">
                         <li class="{{(str_contains(url()->current(), 'billing/item') ? 'active' : '' )}}">
                             <a href="{{route('billing.itemCreate')}}" class="waves-effect waves-dark ">
-                                <span class="pcoded-mtext">Pharmacy</span>
+                                <span class="pcoded-mtext">Pharmacy Billing</span>
                             </a>
                         </li>
                         <li class="{{(str_contains(url()->current(), 'billing/test') ? 'active' : '' )}}">
                             <a href="{{route('billing.testCreate')}}" class="waves-effect waves-dark ">
-                                <span class="pcoded-mtext">Clinical tests</span>
+                                <span class="pcoded-mtext">Lab Test Billing</span>
                             </a>
                         </li>
                         <li class="{{(str_contains(url()->current(), 'billing/index') ? 'active' : '' )}}">
@@ -128,7 +129,6 @@
 {{--                    </a>--}}
 {{--                </li>--}}
 
-                @if (Auth::user()->role == 'staff' || Auth::user()->role == 'doctor')
 
                 <li class="pcoded-hasmenu {{(str_contains(url()->current(), 'appointment') ? 'active pcoded-trigger' : '' )}}">
                     <a href="javascript:void(0)" class="waves-effect waves-dark">
@@ -137,13 +137,15 @@
 
                     </a>
                     <ul class="pcoded-submenu">
+                        @if (Auth::user()->role != 'doctor')
                         <li class="{{(str_contains(url()->current(), 'appointment/create') ? 'active' : '' )}}">
                             <a href="{{route('appointment.create')}}" class="waves-effect waves-dark ">
-                                <span class="pcoded-mtext">New appointment</span>
+                                <span class="pcoded-mtext">New Appointment</span>
                                 {{--                        <span class="pcoded-badge label label-danger">100+</span>--}}
 
                             </a>
                         </li>
+                        @endif
                         <li class="{{(str_contains(url()->current(), 'appointment/index') ? 'active' : '' )}}">
                             <a href="{{route('appointment.index')}}" class="waves-effect waves-dark ">
                                 <span class="pcoded-mtext">View Appointments</span>
@@ -151,7 +153,6 @@
                         </li>
                     </ul>
                 </li>
-                @endif
 {{--                <li class="{{ (str_contains(url()->current(), 'service') ? 'active' : '' ) }}">--}}
 {{--                    <a href="{{route('service.index')}}" class="waves-effect waves-dark ">--}}
 {{--                        <span class="pcoded-micon"><i class="fa-solid fa-microscope"></i></span>--}}

@@ -1,7 +1,7 @@
 <nav class="navbar header-navbar pcoded-header">
     <div class="navbar-wrapper">
         <div class="navbar-logo">
-            <a href="index.html">
+            <a href="">
                 <h3> <i class="fas fa-clinic-medical"></i> E-clinic</h3>
 {{--                <img class="img-fluid" src="{{asset('template/png/logo.png')}}" alt="Theme-Logo" />--}}
             </a>
@@ -95,14 +95,19 @@
                             <i class="feather icon-chevron-down"></i>
                         </div>
                         <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                            <li>
-                                <a href="#!">
-                                    <i class="feather icon-settings"></i> Settings
-                                </a>
-                            </li>
+{{--                            <li>--}}
+{{--                                <a href="#!">--}}
+{{--                                    <i class="feather icon-settings"></i> Settings--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
                             <li>
                                 <a href="{{route('profile.edit')}}">
                                     <i class="feather icon-user"></i> Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('password.edit')}}">
+                                    <i class="feather icon-user"></i> Update password
                                 </a>
                             </li>
                             <li>

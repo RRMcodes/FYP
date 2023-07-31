@@ -24,9 +24,6 @@
                                     <div class="card-block">
                                         <div class="row mt-3 m-1">
                                             <div class="col-md-3">
-                                                <div style="position: relative; width: 150px; height: 150px;">
-                                                    <img src="{{ asset('images/img1.jfif' ) }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                                                </div>
                                             </div>
                                             <div class="col-md-5">
                                                 <div class="form-group">

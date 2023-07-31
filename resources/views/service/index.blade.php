@@ -49,7 +49,6 @@
                                                             <td>{{$service->price}}</td>
 
                                                             <td>
-                                                                <a href="{{route('service.show',['id'=>$service->id])}}" class="btn btn-primary"><i class="fa fa-file"></i></a>
                                                                 <a href="{{route('service.edit',['id'=>$service->id])}}" class="btn btn-secondary"><i class="fa fa-edit"></i></a>
                                                                 <a href="{{route('service.delete',['id'=>$service->id])}}" class="btn btn-danger"><i class="fa fa-trash " aria-hidden="true"></i></a>
                                                             </td>

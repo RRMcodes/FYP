@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Staff;
+use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class StaffController extends Controller
 {
@@ -47,7 +49,17 @@ class StaffController extends Controller
             // You can save the $imageName to your database or perform any other required actions.
         }
         $staff['image'] = $imageName;
+
+        $user = User::create([
+            'name'  =>  $staff['f_name'].' '.$staff['l_name'],
+            'email' =>  $staff['email'],
+            'password'  =>  Hash::make('password'),
+            'role'  => 'staff'
+        ]);
+
+        $staff['id'] = $user->id;
         Staff::create($staff);
+
         return redirect()->route('staff.index')->with('message', 'Staff record created successfully.');
     }
 
@@ -85,8 +97,16 @@ class StaffController extends Controller
     public function update(Request $request)
     {
         $staff = $request->except(['_token']);
+
+        User::find($request->id)->update([
+            'name'  =>  $staff['f_name'].' '.$staff['l_name'],
+            'email' =>  $staff['email'],
+            'password'  =>  Hash::make('password'),
+        ]);
+
         Staff::find($request->id)
             ->update($staff);
+
         return redirect()->route('staff.index')->with('message', 'Staff record updated successfully.');
     }
 
@@ -100,6 +120,10 @@ class StaffController extends Controller
     {
         $staff = Staff::find($id);
         $staff->delete();
+
+        $user = User::find($id);
+        $user->delete();
+
 
         return redirect()->route('staff.index')->with('message', 'Staff record deleted successfully.');
     }

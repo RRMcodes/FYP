@@ -20,7 +20,10 @@
                                             </div>
 
                                             <div class="card-header">
-                                            <a href="{{route('patient.create')}}" class="btn btn-primary" action="">Add Patient</a>
+                                                @if (Auth::user()->role != 'doctor')
+
+                                                <a href="{{route('patient.create')}}" class="btn btn-primary" action="">Add Patient</a>
+                                                @endif
                                         </div>
                                         <div class="card-block">
                                             <div class="dt-responsive table-responsive">
@@ -53,8 +56,11 @@
                                                             <td>{{$patient->dob}}</td>
                                                             <td>
                                                                 <a href="{{route('patient.show',['id'=>$patient->id])}}" class="btn btn-primary"><i class="fa-solid fa-info"></i></a>
+                                                                @if (Auth::user()->role != 'doctor')
+
                                                                 <a href="{{route('patient.edit',['id'=>$patient->id])}}" class="btn btn-secondary"><i class="fa fa-edit"></i></a>
                                                                 <a href="{{route('patient.delete',['id'=>$patient->id])}}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                                @endif
                                                             </td>
                                                         </tr>
                                                     @endforeach

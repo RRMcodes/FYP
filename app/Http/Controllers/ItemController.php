@@ -26,7 +26,7 @@ class ItemController extends Controller
 
     public function itemLog()
     {
-        $itemLogs = ItemLog::all();
+        $itemLogs = ItemLog::orderBy('created_at','desc')->get();
         $item = Item::all();
         return view('item.log')->with(compact('itemLogs','item'));
     }

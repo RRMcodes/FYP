@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SignupMail;
 use App\Models\Patient;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class PatientController extends Controller
 {
@@ -34,13 +38,40 @@ class PatientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
+//    public function store(Request $request)
+//    {
+//
+//        $patient = $request->except(['_token']);
+//        $user = Patient::create($patient);
+//        User::create($patient);
+//
+//        return redirect()->route('patient.index')->with('message', 'Patient record created successfully.');
+//    }
     public function store(Request $request)
     {
-
+        // Create the patient record
         $patient = $request->except(['_token']);
+
+        // Create the user record and associate it with the patient ID
+        $user = User::create([
+            'name'  =>  $patient['f_name'].' '.$patient['l_name'],
+            'email' =>  $patient['email'],
+            'password'  =>  Hash::make('password'),
+            'role'  => 'patient'
+        ]);
+
+        $username = $user->name;
+        $email = $user->email;
+
+        Mail::to($email)->send(new SignupMail($username, $email));
+
+        $patient['id'] = $user->id;
         Patient::create($patient);
+
+
         return redirect()->route('patient.index')->with('message', 'Patient record created successfully.');
     }
+
 
     /**
      * Display the specified resource.
@@ -76,8 +107,16 @@ class PatientController extends Controller
     public function update(Request $request)
     {
         $patient = $request->except(['_token']);
+
+        User::find($request->id)->update([
+            'name'  =>  $patient['f_name'].' '.$patient['l_name'],
+            'email' =>  $patient['email'],
+            'password'  =>  Hash::make('password'),
+        ]);
+
         Patient::find($request->id)
             ->update($patient);
+
         return redirect()->route('patient.index')->with('message', 'Patient record updated successfully.');
 
     }
@@ -92,6 +131,9 @@ class PatientController extends Controller
     {
         $patient = Patient::find($id);
         $patient->delete();
+
+        $user = User::find($id);
+        $user->delete();
 
         return redirect()->route('patient.index')->with('message', 'Patient record deleted successfully.');
     }

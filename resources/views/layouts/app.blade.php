@@ -94,9 +94,6 @@
 
         @include('layouts.header')
 
-        @include('layouts.chat')
-
-        @include('layouts.message')
 
         <div class="pcoded-main-container">
             <div class="pcoded-wrapper">

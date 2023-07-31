@@ -38,7 +38,7 @@
                                                         <td>Doctor</td>
                                                         <td>specialization</td>
                                                         <td>Appointment date</td>
-                                                        <td>Actions</td>
+{{--                                                        <td>Actions</td>--}}
                                                     </tr>
                                                     </thead>
 
@@ -51,10 +51,10 @@
                                                             <td>{{$appointment->specialist}}</td>
                                                             <td>{{$appointment->appointment_date}}</td>
 
-                                                            <td>
-                                                                <a href="" class="btn btn-primary"><i class="fa-solid fa-info"></i></a>
+{{--                                                            <td>--}}
+{{--                                                                <a href="" class="btn btn-primary"><i class="fa-solid fa-info"></i></a>--}}
 
-                                                            </td>
+{{--                                                            </td>--}}
                                                         </tr>
                                                     @endforeach
                                                     </tbody>

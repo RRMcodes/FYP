@@ -35,8 +35,8 @@
                                                         <td>Sno</td>
                                                         <td>Name</td>
                                                         <td>Manufacturer</td>
-                                                        <td>Manufactured_date</td>
-                                                        <td>Expiry_date</td>
+                                                        <td>MF Date</td>
+                                                        <td>Expiry date</td>
                                                         <td>Quantity</td>
                                                         <td>Price</td>
                                                         <td>Actions</td>
@@ -55,7 +55,7 @@
                                                             <td>{{$item->price}}</td>
 
                                                             <td>
-                                                                <a href="{{route('item.show',['id'=>$item->id])}}" class="btn btn-primary"><i class="fa fa-file"></i></a>
+{{--                                                                <a href="{{route('item.show',['id'=>$item->id])}}" class="btn btn-primary"><i class="fa fa-file"></i></a>--}}
                                                                 <a href="{{route('item.edit',['id'=>$item->id])}}" class="btn btn-secondary"><i class="fa fa-edit"></i></a>
                                                                 <a href="{{route('item.delete',['id'=>$item->id])}}" class="btn btn-danger"><i class="fa fa-trash " aria-hidden="true"></i></a>
                                                             </td>

@@ -14,6 +14,7 @@ class Staff extends Model
 
     protected $table = 'staff';
     protected $fillable = [
+        "id",
         "f_name" ,
         "l_name" ,
         "address" ,

@@ -48,12 +48,12 @@
                                                         <!-- Form Group (first name)-->
                                                         <div class="col-md-6">
                                                             <label class="small mb-1" for="inputFirstName">First name</label>
-                                                            <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" name="f_name" value="{{$staff->f_name}}">
+                                                            <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" name="f_name" value="{{$staff->f_name}}" required>
                                                         </div>
                                                         <!-- Form Group (last name)-->
                                                         <div class="col-md-6">
                                                             <label class="small mb-1" for="inputLastName">Last name</label>
-                                                            <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" name="l_name" value="{{$staff->l_name}}">
+                                                            <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" name="l_name" value="{{$staff->l_name}}" required>
                                                         </div>
                                                     </div>
                                                     <!-- Form Row        -->
@@ -61,7 +61,7 @@
                                                         <!-- Form Group (location)-->
                                                         <div class="col-md-6">
                                                             <label class="small mb-1" for="inputLocation">Address</label>
-                                                            <input class="form-control" id="inputLocation" type="text" placeholder="Enter your location" name="address" value="{{$staff->address}}">
+                                                            <input class="form-control" id="inputLocation" type="text" placeholder="Enter your location" name="address" value="{{$staff->address}}" required>
                                                         </div>
                                                         <!-- Form Group (birthday)-->
                                                         <div class="col-md-6">
@@ -74,19 +74,19 @@
                                                     <!-- Form Group (email address)-->
                                                     <div class="mb-3">
                                                         <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                                                        <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" name="email" value="{{$staff->email}}">
+                                                        <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" name="email" value="{{$staff->email}}" required>
                                                     </div>
                                                     <!-- Form Row-->
                                                     <div class="row gx-3 mb-3">
                                                         <!-- Form Group (phone number)-->
                                                         <div class="col-md-6">
                                                             <label class="small mb-1" for="inputPhone">Phone number</label>
-                                                            <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" name="contact_number" value="{{$staff->contact_number}}">
+                                                            <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" name="contact_number" value="{{$staff->contact_number}}" required>
                                                         </div>
                                                         <!-- Form Group (position)-->
                                                         <div class="col-md-6">
                                                             <label class="small mb-1" for="inputOrgName">Position</label>
-                                                            <input class="form-control" id="inputOrgName" type="text" placeholder="Enter your position" name="position" value="{{$staff->position}}">
+                                                            <input class="form-control" id="inputOrgName" type="text" placeholder="Enter your position" name="position" value="{{$staff->position}}" required>
                                                         </div>
 
                                                     </div>
@@ -95,13 +95,13 @@
                                                         <!-- Form Group (Experience)-->
                                                         <div class="col-md-3">
                                                             <label class="small mb-1" for="inputPhone">Experience (years)</label>
-                                                            <input class="form-control" id="inputPhone" type="number" placeholder="Example: 4" name="experience" value="{{$staff->experience}}">
+                                                            <input class="form-control" id="inputPhone" type="number" placeholder="Example: 4" name="experience" value="{{$staff->experience}}" required>
                                                         </div>
 
                                                         <!-- Form Group (Experience)-->
                                                         <div class="col-md-4">
                                                             <label class="small mb-1" for="inputPhone">Status</label>
-                                                            <select class="form-control form-select" aria-label="Default select example" name="status" id="inputStatus">
+                                                            <select class="form-control form-select" aria-label="Default select example" name="status" id="inputStatus" required>
                                                                 <option value="part-time" {{ $staff->status == 'part-time' ? 'selected' : '' }}>Part-time</option>
                                                                 <option value="full-time" {{ $staff->status == 'full-time' ? 'selected' : '' }}>Full-time</option>
                                                             </select>

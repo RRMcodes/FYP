@@ -10,8 +10,10 @@
                     <div class="row">
                         <div class="col-sm-12">
 
-                            <form id="" method="post" action="{{route('profile.update')}}" enctype="multipart/form-data">
+                            <form id="" method="post"  action="{{route('password.update')}}" >
                                 @csrf
+                                @method('put')
+
                                 <div class="d-flex justify-content-center align-items-center h-100">
                                     <div class="container">
                                         <div class="card shadow-lg">
@@ -20,51 +22,41 @@
                                                 <div class="col-md-4">
                                                     <div class="card-body">
 
-{{--                                                    <div class="form-group row">--}}
-{{--                                                        <label class="col-sm-4 col-form-label ml-4">Image</label>--}}
-{{--                                                        <div class="col-sm-8">--}}
-{{--                                                            <input type="file" class="form-control" name="image"  accept='image/*' id="image" onchange="imageUpload('image','imagePreview')" >--}}
-{{--                                                            <span class="messages"></span>--}}
-{{--                                                        </div>--}}
-
-{{--                                                        <div class="col-sm-10">--}}
-{{--                                                            <img   class="thumbnail" style="height: 150px;" id="imagePreview">--}}
-{{--                                                        </div>--}}
-
-{{--                                                    </div>--}}
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <div class="card-body">
-                                                        <div class="row mt-3">
-                                                            <div class="col-sm-3">
-                                                                <h6 class="fw-bold mb-2">Name:</h6>
-                                                            </div>
-                                                            <div class="col-sm-9">
-                                                                <input class="form-control" type="text" value="{{$user->name}}" name="name">
-                                                            </div>
-                                                        </div>
+
 
                                                         <div class="row mt-3">
                                                             <div class="col-sm-3">
-                                                                <h6 class="fw-bold mb-2">Email:</h6>
+                                                                <h6 class="fw-bold mb-2">Current Password</h6>
                                                             </div>
                                                             <div class="col-sm-9">
-                                                                <input class="form-control" type="email" value="{{$user->email}}" name="email">
+                                                                <input class="form-control" type="password" value="" name="current_password">
                                                             </div>
                                                         </div>
+
+
                                                         <div class="row mt-3">
                                                             <div class="col-sm-3">
-                                                                <h6 class="fw-bold mb-2">Role:</h6>
+                                                                <h6 class="fw-bold mb-2">New Password</h6>
                                                             </div>
                                                             <div class="col-sm-9">
-                                                                <select class="form-select form-control" id="roleselect" name="role" value="" disabled>
-                                                                    <option value="staff" {{$user->role == 'staff' ? 'selected' : ''}}>Staff</option>
-                                                                    <option value="doctor" {{$user->role == 'doctor' ? 'selected' : ''}}>Doctor</option>
-                                                                    <option value="doctor" {{$user->role == 'patient' ? 'selected' : ''}}>Patient</option>
-                                                                </select>
+                                                                <input class="form-control" type="password" value="" name="password">
                                                             </div>
                                                         </div>
+
+
+                                                        <div class="row mt-3">
+                                                            <div class="col-sm-3">
+                                                                <h6 class="fw-bold mb-4">Confirm Password</h6>
+                                                            </div>
+                                                            <div class="col-sm-9">
+                                                                <input class="form-control" type="password" value="" name="password_confirmation">
+                                                            </div>
+                                                        </div>
+
 
                                                         <div class="row mt-3">
                                                             <div class="col-sm-9 ms-2 text-right">

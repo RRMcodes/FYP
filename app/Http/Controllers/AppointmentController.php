@@ -13,6 +13,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class AppointmentController extends Controller
@@ -24,7 +25,26 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $appointments = Appointment::all();
+//        $appointments = Appointment::join('patient','patient.id','=','appointments.patient_id')
+//            ->join('doctors','doctors.id','=','appointments.doctor_id')->get();
+//        dd($appointments);
+
+        $user = Auth::user(); // Get the ID of the currently logged-in user
+
+
+        if ($user->role == 'staff'){
+            $appointments = Appointment::orderBy('created_at','desc')->get();
+        }
+        elseif ($user->role == 'doctor'){
+            $appointments = Appointment::where('doctor_id',$user->id)
+                ->orderBy('created_at','desc')->get();
+
+        }
+        elseif ($user->role == 'patient'){
+            $appointments = Appointment::where('patient_id',$user->id)
+                ->orderBy('created_at','desc')->get();
+        }
+
         $patients = Patient::all();
         $doctors = Doctor::all();
 //        dd($appointments, $patients, $doctors);

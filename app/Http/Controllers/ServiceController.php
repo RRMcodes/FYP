@@ -24,7 +24,8 @@ class ServiceController extends Controller
 
     public function serviceLog()
     {
-        $serviceLogs = ServiceLog::all();
+        $serviceLogs = ServiceLog::orderBy('created_at','desc')->get();
+
         $services = Service::all();
         return view('service.log')->with(compact('serviceLogs','services'));
     }

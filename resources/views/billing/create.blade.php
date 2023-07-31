@@ -161,7 +161,7 @@
                     '<select class="form-control itemName" name="itemId[]" id="itemName_' + rowNum + '">' +
                     '<option value="" disabled selected>--Select--</option>' +
                     '@foreach($items as $item)' +
-                    '<option value="{{$item->id}}">{{$item->name}}</option>' +
+                    '<option value="{{$item->id}}" data-price="{{$item->price}}">{{$item->name}}</option>' +
                     '@endforeach' +
                     '</select>' +
                     '</td>' +
@@ -209,16 +209,20 @@
             }
 
             function getPrice (classname) {
+                var price = $(classname).find('option:selected').data('price');
+                console.log(price);
                 var itemId = $(classname).val();
                 var rowId = $(classname).attr("id").split("_")[1];
+                console.log(itemId, rowId);
 
                 // var price = $(this).find('option:selected').data('price');
                 // $(this).closest('tr').find('.price').val(price);
+                $("#price_" + rowId).val(price);
 
-                $.get('/fyp/public/billing/getItem/' + itemId, function(item) {
-                    $("#price_" + rowId).val(item.price);
+                // $.get('/fyp/public/billing/getItem/' + itemId, function(item) {
+                //     $("#price_" + rowId).val(price);
                     calculateTotal(rowId);
-                });
+                // });
             }
 
             function calculateTotal(rowId) {

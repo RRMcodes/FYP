@@ -33,7 +33,7 @@ class EventController extends Controller
 
     public function eventLog()
     {
-        $eventLogs = EventLog::all();
+        $eventLogs = EventLog::orderBy('created_at','desc')->get();
         $event = Event::all();
         return view('event.log')->with(compact('eventLogs','event'));
     }
@@ -137,7 +137,7 @@ class EventController extends Controller
             'end_date'  =>  $event->end_date,
 
         ]);
-        return redirect()->route('event.index')->with('message','Mail send successfully');
+        return redirect()->route('event.index')->with('message','Mail sent successfully');
     }
 
 }

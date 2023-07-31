@@ -13,7 +13,7 @@
 
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5>Add Events</h5>
+                                        <h5>Upload Reports</h5>
                                         <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>
                                     </div>
                                     <div class="card-block">

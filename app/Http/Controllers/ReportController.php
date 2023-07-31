@@ -16,7 +16,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
-
+use Illuminate\Support\Facades\Auth;
 class ReportController extends Controller
 {
     /**
@@ -24,12 +24,39 @@ class ReportController extends Controller
      *
      * @return Application|Factory|View
      */
+//    public function index()
+//    {
+//        $user_id = Auth::id();
+//
+//        $reports = Report::join('patient', 'report.patient_id', '=', 'patient.id')
+//            ->join('services', 'report.test', '=', 'services.id')
+//            ->select('report.*', 'patient.f_name as f_name', 'patient.l_name as l_name', 'services.name as test_name', 'services.abbreviation as abbreviation')
+//            ->get();
+//        return view('report.index')->with(compact('reports'));
+//    }
+
+
+
     public function index()
     {
-        $reports = Report::join('patient', 'report.patient_id', '=', 'patient.id')
+        $user = Auth::user()->role;
+
+        if($user == 'patient'){
+            $user_id = Auth::id();
+            $reports = Report::join('patient', 'report.patient_id', '=', 'patient.id')
+                ->join('services', 'report.test', '=', 'services.id')
+                ->where('report.patient_id', $user_id) // Filter records for the current user
+                ->select('report.*', 'patient.f_name as f_name', 'patient.l_name as l_name', 'services.name as test_name', 'services.abbreviation as abbreviation')
+                ->orderBy('created_at','desc')->get();
+        }
+        else{
+            $reports = Report::join('patient', 'report.patient_id', '=', 'patient.id')
             ->join('services', 'report.test', '=', 'services.id')
             ->select('report.*', 'patient.f_name as f_name', 'patient.l_name as l_name', 'services.name as test_name', 'services.abbreviation as abbreviation')
-            ->get();
+                ->orderBy('created_at','desc')->get();
+        }
+
+
         return view('report.index')->with(compact('reports'));
     }
 

@@ -16,7 +16,7 @@
                                         <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>
                                     </div>
                                     <div class="card-block">
-                                        <form id="main" method="post" action="{{route('patient.store')}}" novalidate>
+                                        <form id="main" method="post" action="{{route('patient.update',['id'=>$patient->id])}}" novalidate>
                                             {{csrf_field()}}
 
                                             <div class="form-group row">
@@ -64,7 +64,19 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">Blood group</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="bloodGroup" name="blood_group" value="{{$patient->blood_group}}" placeholder="" required>
+{{--                                                    <input type="text" class="form-control" id="bloodGroup" name="blood_group" value="{{$patient->blood_group}}" placeholder="" required>--}}
+                                                    <select class="form-control form-select col-sm-4" aria-label="Default select example" name="specialization" id="specialization" required>
+                                                        <option >--select--</option>
+                                                        <option value="A+" {{ $patient->blood_group == 'A+' ? 'selected' : '' }} >A+</option>
+                                                        <option value="A-" {{ $patient->blood_group == 'A-' ? 'selected' : '' }} >A-</option>
+                                                        <option value="B+" {{ $patient->blood_group == 'B+' ? 'selected' : '' }} >B+</option>
+                                                        <option value="B-" {{ $patient->blood_group == 'B-' ? 'selected' : '' }} >B-</option>
+                                                        <option value="AB+" {{ $patient->blood_group == 'AB+' ? 'selected' : '' }} >AB+</option>
+                                                        <option value="AB-" {{ $patient->blood_group == 'AB-' ? 'selected' : '' }} >AB-</option>
+                                                        <option value="O+" {{ $patient->blood_group == 'O+' ? 'selected' : '' }} >O+</option>
+                                                        <option value="O-" {{ $patient->blood_group == 'O-' ? 'selected' : '' }} >O-</option>
+                                                    </select>
+
                                                     <span class="messages"></span>
                                                 </div>
                                             </div>

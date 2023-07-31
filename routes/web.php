@@ -25,8 +25,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+//    return view('welcome');
+    return redirect()->route('login');
 });
+
+Route::get('/password/edit', function () {
+    return view('profile.editPassword');
+})->name('password.edit');
 
 Route::get('/dashboard', function () {
     $patients = \App\Models\Patient::all();
@@ -45,19 +50,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth','verified'])->controller(PatientController::class)->group(function (){
+Route::middleware(['auth','verified','staff'])->controller(PatientController::class)->group(function (){
     Route::get('/patient/create','create')->name('patient.create');
     Route::post('/patient/store','store')->name('patient.store');
-    Route::get('/patient/index','index')->name('patient.index');
     Route::get('/patient/edit/{id}','edit')->name('patient.edit');
-    Route::get('/patient/show/{id}','show')->name('patient.show');
     Route::post('/patient/update','update')->name('patient.update');
     Route::any('/patient/delete/{id}','destroy')->name('patient.delete');
     Route::post('/patient/getPatientsJson','getPatientsJson')->name('patient.getPatientsJson');
-
 });
+Route::get('/patient/index', [PatientController::class,'index'])->name('patient.index')->middleware(['auth','verified']);
+Route::get('/patient/show/{id}',[PatientController::class,'show'])->name('patient.show')->middleware(['auth','verified']);
 
-Route::middleware(['auth','verified'])->controller(StaffController::class)->group(function (){
+
+Route::middleware(['auth','verified','staff'])->controller(StaffController::class)->group(function (){
     Route::get('/staff/create','create')->name('staff.create');
     Route::post('/staff/store','store')->name('staff.store');
     Route::get('/staff/index','index')->name('staff.index');
@@ -69,7 +74,7 @@ Route::middleware(['auth','verified'])->controller(StaffController::class)->grou
 
 });
 
-Route::middleware(['auth','verified'])->controller(DoctorController::class)->group(function (){
+Route::middleware(['auth','verified','staff'])->controller(DoctorController::class)->group(function (){
     Route::get('/doctor/create','create')->name('doctor.create');
     Route::post('/doctor/store','store')->name('doctor.store');
     Route::get('/doctor/index','index')->name('doctor.index');
@@ -82,7 +87,7 @@ Route::middleware(['auth','verified'])->controller(DoctorController::class)->gro
 
 });
 
-Route::middleware(['auth','verified'])->controller(ServiceController::class)->group(function (){
+Route::middleware(['auth','verified','staff'])->controller(ServiceController::class)->group(function (){
     Route::get('/service/create','create')->name('service.create');
     Route::post('/service/store','store')->name('service.store');
     Route::get('/service/index','index')->name('service.index');
@@ -95,7 +100,7 @@ Route::middleware(['auth','verified'])->controller(ServiceController::class)->gr
 
 });
 
-Route::middleware(['auth','verified'])->controller(ItemController::class)->group(function (){
+Route::middleware(['auth','verified','staff'])->controller(ItemController::class)->group(function (){
     Route::get('/item/create','create')->name('item.create');
     Route::post('/item/store','store')->name('item.store');
     Route::get('/item/index','index')->name('item.index');
@@ -107,10 +112,9 @@ Route::middleware(['auth','verified'])->controller(ItemController::class)->group
     Route::get('/item/itemLog','itemLog')->name('item.itemLog');
 });
 
-Route::middleware(['auth','verified'])->controller(ReportController::class)->group(function (){
+Route::middleware(['auth','verified','staff'])->controller(ReportController::class)->group(function (){
     Route::get('/report/create','create')->name('report.create');
     Route::post('/report/store','store')->name('report.store');
-    Route::get('/report/index','index')->name('report.index');
     Route::get('/report/edit/{id}','edit')->name('report.edit');
     Route::get('/report/show/{id}','show')->name('report.show');
     Route::post('/report/update','update')->name('report.update');
@@ -119,8 +123,10 @@ Route::middleware(['auth','verified'])->controller(ReportController::class)->gro
     Route::get('/report/reportLog','reportLog')->name('report.reportLog');
     Route::get('/report/sendMail/{id}','sendMail')->name('report.sendMail');
 });
+Route::get('/report/index',[ReportController::class,'index'])->name('report.index')->middleware(['auth','verified']);
 
-Route::middleware(['auth','verified'])->controller(EventController::class)->group(function (){
+
+Route::middleware(['auth','verified','staff'])->controller(EventController::class)->group(function (){
     Route::get('/event/create','create')->name('event.create');
     Route::post('/event/store','store')->name('event.store');
     Route::get('/event/index','index')->name('event.index');
@@ -141,13 +147,16 @@ Route::middleware(['auth','verified','staff'])->controller(BillingController::cl
     Route::get('/billing/getItem/{id}','getItem')->name('getItem');
     Route::get('/billing/testCreate','testCreate')->name('billing.testCreate');
     Route::post('/billing/testStore','testStore')->name('billing.testStore');
+    Route::get('/billing/generatePDF','generatePDF')->name('billing.generatePDF');
+
 });
 
-Route::middleware(['auth','verified','appointment'])->controller(AppointmentController::class)->group(function (){
-    Route::get('/appointment/index','index')->name('appointment.index');
+Route::middleware(['auth','verified','patient'])->controller(AppointmentController::class)->group(function (){
     Route::get('/appointment/create','create')->name('appointment.create');
     Route::post('/appointment/store','store')->name('appointment.store');
 });
+Route::get('/appointment/index',[AppointmentController::class,'index'])->name('appointment.index')->middleware(['auth','verified']);
+
 
 
 

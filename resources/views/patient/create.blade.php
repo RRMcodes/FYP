@@ -65,7 +65,19 @@
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Blood group</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="bloodGroup" name="blood_group" placeholder="" required>
+{{--                                                <input type="text" class="form-control" id="bloodGroup" name="blood_group" placeholder="" required>--}}
+                                                <select class="form-control form-select col-sm-4" aria-label="Default select example" name="specialization" id="specialization" required>
+                                                    <option >--select--</option>
+                                                    <option value="A+">A+</option>
+                                                    <option value="A-">A-</option>
+                                                    <option value="B+">B+</option>
+                                                    <option value="B-">B-</option>
+                                                    <option value="AB+">AB+</option>
+                                                    <option value="AB-">AB-</option>
+                                                    <option value="O+">O+</option>
+                                                    <option value="O-">O-</option>
+                                                </select>
+
                                                 <span class="messages"></span>
                                             </div>
                                         </div>

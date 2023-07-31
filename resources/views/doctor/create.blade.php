@@ -80,21 +80,41 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">Specialization</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="specialization" name="specialization"  placeholder="" required>
+{{--                                                    <input type="text" class="form-control" id="specialization" name="specialization"  placeholder="" required>--}}
+                                                    <select class="form-control form-select col-sm-4" aria-label="Default select example" name="specialization" id="specialization" required>
+                                                        <option >--select--</option>
+                                                        <option value="cardiologist"> Cardiologist </option>
+                                                        <option value="dermatologist"> Dermatologist </option>
+                                                        <option value="dermatologist"> ENT Specialist </option>
+                                                        <option value="dermatologist"> Rheumatologist </option>
+                                                        <option value="dermatologist"> Gynecologist </option>
+                                                        <option value="gastroenterologist"> Gastroenterologist </option>
+                                                        <option value="neurologist"> Neurologist </option>
+                                                        <option value="neurologist"> Nephrologist </option>
+                                                        <option value="ophthalmologist"> Ophthalmologist </option>
+                                                        <option value="orthopedic"> Orthopedic  Surgeon</option>
+                                                        <option value="pediatrician"> Pediatrician </option>
+                                                        <option value="psychiatrist"> Psychiatrist </option>
+                                                    </select>
                                                     <span class="messages"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">Status</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="status" name="status"  placeholder="" required>
+{{--                                                    <input type="text" class="form-control" id="status" name="status"  placeholder="" required>--}}
+                                                    <select class="form-control form-select col-sm-4" aria-label="Default select example" name="status" id="status" required>
+                                                        <option value="part-time" >Part-time</option>
+                                                        <option value="full-time" >Full-time</option>
+                                                    </select>
                                                     <span class="messages"></span>
                                                 </div>
                                             </div>
+
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">Experience</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="experience" name="experience"  placeholder="" required>
+                                                <div class="col-sm-4">
+                                                    <input type="number" class="form-control" id="experience" name="experience"  placeholder="" required>
                                                     <span class="messages"></span>
                                                 </div>
                                             </div>

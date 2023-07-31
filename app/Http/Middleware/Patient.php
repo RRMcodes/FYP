@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class Doctor
+class Patient
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class Doctor
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->role == "doctor" || auth()->user()->role == "staff") {
+        if (auth()->user()->role == "staff" || auth()->user()->role == "patient") {
             return $next($request);
         }
         abort(403, 'Unauthorized action.');

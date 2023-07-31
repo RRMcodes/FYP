@@ -30,24 +30,9 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="row align-items-center m-b-30">
-                                                    <div class="col">
-                                                        <h6 class="m-b-5 text-white">This month</h6>
-                                                        <h3 class="m-b-0 f-w-700 text-white">+ {{count( $patients->filter(function ($patient) {
-                                                                                                return $patient->created_at->month === now()->month;
-                                                                                            }))}}
-                                                    </div>
-                                                </div>
 
 
-                                                <div class="row align-items-center m-b-30">
-                                                    <div class="col">
-                                                        <h6 class="m-b-5 text-white">Today</h6>
-                                                        <h3 class="m-b-0 f-w-700 text-white">+ {{count($patients->filter(function ($patient) {
-                                                                                            return $patient->created_at->isToday();
-                                                                                        }))}}
-                                                    </div>
-                                                </div>
+
 
                                             </div>
                                         </div>
@@ -98,16 +83,19 @@
                                             <div class="card-body">
                                                 <div class="row align-items-center m-b-30">
                                                     <div class="col">
-                                                        <h3 class="m-b-5 text-white">Appointments</h3>
+                                                        <h3 class="m-b-5 text-white" style="margin-left: -10px">Appointments</h3>
                                                     </div>
-                                                    <div class="col-auto ">
+                                                    <div class="col-auto " style="margin-left: -35px">
                                                         <i class="fa-regular fa-calendar-days fa-lg text-c-yellow "></i>
                                                     </div>
                                                 </div>
                                                 <div class="row align-items-center m-b-30">
                                                     <div class="col">
                                                         <h6 class="m-b-5 text-white">Today</h6>
-                                                        <h3 class="m-b-0 f-w-700 text-white">{{count($appointments)}}</h3>
+                                                        <h3 class="m-b-0 f-w-700 text-white">{{count($appointments->filter(function ($appointment) {
+                                                                                                return date_format(date_create(($appointment->appointment_date)), 'Y-m-d') == now()->format('Y-m-d');
+                                                                                                    }))}}
+                                                        </h3>
                                                     </div>
                                                 </div>
                                             </div>
