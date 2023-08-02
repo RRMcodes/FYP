@@ -95,7 +95,7 @@ class BillingController extends Controller
         }
         ItemLog::insert($item_collection);
 
-        return $this->generatePDF($billing->id)->redirect()->route('billing.index')->with('message','Invoice generated successfully');
+        return $this->generatePDF($billing->id);
 
 //        return redirect()->route('billing.index')->with('message','Invoice generated successfully');
     }
@@ -128,7 +128,9 @@ class BillingController extends Controller
             }
         }
         ServiceLog::insert($service_collection);
-        return redirect()->route('billing.index')->with('message','Invoice generated successfully');
+        return $this->generatePDF($billing->id);
+
+//        return redirect()->route('billing.index')->with('message','Invoice generated successfully');
     }
 
     /**
@@ -189,62 +191,7 @@ class BillingController extends Controller
         //
     }
 
-    public function generatePDF1()
-    {
-        $id =2;
-        $items = Item::all();
-        $billing = Billing::find($id);
-        $patient = Patient::find($billing->patient_id);
-        $doctor = Doctor::find($billing->doctor_id);
-        $itemLogs = ItemLog::where('billing_id', $id)->get();
-        $services = Service::all();
-        $serviceLogs = ServiceLog::where('billing_id', $id)->get();
 
-        // Prepare the data array to pass to the view
-        $data = [
-            'itemLogs' => $itemLogs,
-            'items' => $items,
-            'billing' => $billing,
-            'patient' => $patient,
-            'doctor' => $doctor,
-            'services' => $services,
-            'serviceLogs' => $serviceLogs,
-        ];
-
-        // Generate the PDF by loading the Blade view
-        $pdf = PDF::loadView('billing.invoice', $data)
-            ->setOptions(['defaultFont' => 'sans-serif']);
-        // Return the PDF for download
-        return $pdf->download('test.pdf');
-    }
-    public function generatePDF2()
-    {
-        $id =2;
-        $items = Item::all();
-        $billing = Billing::find($id);
-        $patient = Patient::find($billing->patient_id);
-        $doctor = Doctor::find($billing->doctor_id);
-        $itemLogs = ItemLog::where('billing_id', $id)->get();
-        $services = Service::all();
-        $serviceLogs = ServiceLog::where('billing_id', $id)->get();
-        if ($billing->transaction == 'item') {
-            $data = [
-                'itemLogs' => $itemLogs,
-                'items' => $items,
-                'billing' => $billing,
-                'patient' => $patient,
-                'doctor' => $doctor,
-                'services' => $services,
-                'serviceLogs' => $serviceLogs,
-            ];        }
-        elseif ($billing->transaction == 'test'){
-            $data = ['serviceLogs', 'services', 'billing', 'patient', 'doctor'];
-        }
-        $pdf = PDF::loadView('billing.invoice', $data);
-
-            return $pdf->download('invoice.pdf');
-
-    }
 
     public function generatePDF($id)
     {
@@ -256,24 +203,56 @@ class BillingController extends Controller
         $itemLogs = ItemLog::where('billing_id', $id)->get();
         $services = Service::all();
         $serviceLogs = ServiceLog::where('billing_id', $id)->get();
+        $grand_total = $billing->transaction_amount;
+        $total = $grand_total/1.13;
+        $vat = $total*0.13;
 
-        // Prepare the data array to pass to the view
-        $data = [
-            'itemLogs' => $itemLogs,
-            'items' => $items,
-            'billing' => $billing,
-            'patient' => $patient,
-            'doctor' => $doctor,
-            'services' => $services,
-            'serviceLogs' => $serviceLogs,
-        ];
+        if($billing->transaction == 'item') {
+            // Prepare the data array to pass to the view
+            $data = [
+                'itemLogs' => $itemLogs,
+                'items' => $items,
+                'billing' => $billing,
+                'patient' => $patient,
+                'doctor' => $doctor,
+                'services' => $services,
+                'serviceLogs' => $serviceLogs,
+                'total' => $total,
+                'vat' => $vat,
+                'grand_total' => $grand_total
+            ];
 
-        // Generate the PDF by loading the Blade view
-        $pdf = PDF::loadView('billing.invoice', $data)
-            ->setOptions(['defaultFont' => 'sans-serif']);
+            // Generate the PDF by loading the Blade view
+            $pdf = PDF::loadView('billing.invoice', $data)
+                ->setOptions(['defaultFont' => 'sans-serif']);
 
-        // Return the PDF for download
-        return $pdf->download('invoice.pdf');
+            $filename = (date('Y-m-d').' '. $patient->f_name.' '.$patient->l_name.' pharmacy-invoice.pdf');
+
+            // Return the PDF for download
+            return $pdf->download($filename);
+        }
+        elseif ($billing->transaction == 'test'){
+            $data = [
+                'itemLogs' => $itemLogs,
+                'items' => $items,
+                'billing' => $billing,
+                'patient' => $patient,
+                'doctor' => $doctor,
+                'services' => $services,
+                'serviceLogs' => $serviceLogs,
+                'total' => $total,
+                'vat' => $vat,
+                'grand_total' => $grand_total
+            ];
+
+            // Generate the PDF by loading the Blade view
+            $pdf = PDF::loadView('billing.testInvoice', $data)
+                ->setOptions(['defaultFont' => 'sans-serif']);
+
+            $filename = (date('Y-m-d').' '. $patient->f_name.' '.$patient->l_name.' test-invoice.pdf');
+
+            return $pdf->download($filename);
+        }
     }
 
 }

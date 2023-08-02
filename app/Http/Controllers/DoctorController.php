@@ -16,6 +16,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use PhpParser\Node\Expr\Cast\Object_;
@@ -117,9 +118,14 @@ class DoctorController extends Controller
      * @return Application|Factory|View
      */
     public function edit($id): View|Factory|Application
-    {
+    { if (Auth::User()->id == $id){
         $doctor = Doctor::find($id);
         return view('doctor.edit')->with(compact('doctor'));
+    }
+    else
+    {
+        abort(403,"Unauthorized action");
+    }
     }
 
     /**

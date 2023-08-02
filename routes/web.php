@@ -58,8 +58,8 @@ Route::middleware(['auth','verified','staff'])->controller(PatientController::cl
 });
 Route::get('/patient/index', [PatientController::class,'index'])->name('patient.index')->middleware(['auth','verified']);
 Route::get('/patient/show/{id}',[PatientController::class,'show'])->name('patient.show')->middleware(['auth','verified']);
-Route::get('/patient/edit/{id}',[PatientController::class,'edit'])->name('patient.edit');
-Route::post('/patient/update',[PatientController::class,'update'])->name('patient.update');
+Route::get('/patient/edit/{id}',[PatientController::class,'edit'])->name('patient.edit')->middleware(['auth','verified']);
+Route::post('/patient/update',[PatientController::class,'update'])->name('patient.update')->middleware(['auth','verified']);
 
 
 Route::middleware(['auth','verified','staff'])->controller(StaffController::class)->group(function (){
@@ -78,14 +78,15 @@ Route::middleware(['auth','verified','staff'])->controller(DoctorController::cla
     Route::get('/doctor/create','create')->name('doctor.create');
     Route::post('/doctor/store','store')->name('doctor.store');
     Route::get('/doctor/index','index')->name('doctor.index');
-    Route::get('/doctor/edit/{id}','edit')->name('doctor.edit');
     Route::get('/doctor/schedule/{id}','schedule')->name('doctor.schedule');
     Route::get('/doctor/show/{id}','show')->name('doctor.show');
-    Route::post('/doctor/update','update')->name('doctor.update');
     Route::any('/doctor/delete/{id}','destroy')->name('doctor.delete');
     Route::post('/doctor/getDoctorsJson','getDoctorsJson')->name('doctor.getDoctorsJson');
-
 });
+Route::get('/doctor/edit/{id}',[DoctorController::class,'edit'])->name('doctor.edit')->middleware(['auth','verified']);
+Route::post('/doctor/update',[DoctorController::class,'update'])->name('doctor.update')->middleware(['auth','verified']);
+
+
 
 Route::middleware(['auth','verified','staff'])->controller(ServiceController::class)->group(function (){
     Route::get('/service/create','create')->name('service.create');
@@ -141,16 +142,15 @@ Route::middleware(['auth','verified','staff'])->controller(EventController::clas
 
 Route::middleware(['auth','verified','staff'])->controller(BillingController::class)->group(function (){
     Route::get('/billing/itemCreate','itemCreate')->name('billing.itemCreate');
+    Route::get('/billing/index','index')->name('billing.index');
     Route::post('/billing/itemStore','itemStore')->name('billing.itemStore');
     Route::get('/billing/itemShow/{id}','itemShow')->name('billing.itemShow');
     Route::get('/billing/getItem/{id}','getItem')->name('getItem');
     Route::get('/billing/testCreate','testCreate')->name('billing.testCreate');
     Route::post('/billing/testStore','testStore')->name('billing.testStore');
+    Route::get('/billing/generatePDF','generatePDF')->name('billing.generatePDF');
 });
-//Route::get('/generatePDF',[BillingController::class,'generatePDF']);
-Route::get('/billing/index',[BillingController::class,'index'])->name('billing.index');
-Route::get('/billing/generatePDF',[BillingController::class,'generatePDF3'])->name('billing.generatePDF');
-
+Route::get('/generatePDF',[BillingController::class,'generatePDF']);
 
 Route::middleware(['auth','verified','patient'])->controller(AppointmentController::class)->group(function (){
     Route::get('/appointment/create','create')->name('appointment.create');
