@@ -16,16 +16,20 @@
                                 <div class="col-sm-12">
                                      <div class="card">
                                             <div class="card-header">
-                                                <h5>Report Details</h5>
+                                                <h5>
+                                                    @if(Auth::User()->role == 'patient' )
+                                                        My
+                                                    @endif
+                                                        Reports
+
+                                                </h5>
                                                 <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>
                                             </div>
-
+                                         @if(Auth::User()->role == 'staff')
                                             <div class="card-header">
-                                                @if(\Illuminate\Support\Facades\Auth::user()->role == 'staff')
-
                                                 <a href="{{route('report.create')}}" class="btn btn-primary" action="">Add Reports</a>
-                                                @endif
-                                        </div>
+                                            </div>
+                                         @endif
                                         <div class="card-block">
                                             <div class="dt-responsive table-responsive">
 
@@ -40,7 +44,9 @@
                                                         <td>Patient ID</td>
                                                         <td>Test</td>
                                                         <td>File</td>
+                                                        @if(Auth::User()->role == 'staff' )
                                                         <td>Status</td>
+                                                        @endif
                                                         <td>Actions</td>
                                                     </tr>
                                                     </thead>
@@ -52,7 +58,9 @@
                                                             <td>{{$report->f_name}} {{$report->l_name}}</td>
                                                             <td>{{$report->test_name}} ({{$report->abbreviation}})</td>
                                                             <td>{{$report->file}}</td>
+                                                            @if(Auth::User()->role == 'staff' )
                                                             <td>{{$report->status}}</td>
+                                                            @endif
                                                             <td>
                                                                 <a href="{{asset('reports/'.$report->file)}}" class="btn btn-secondary"><i class="fa-solid fa-info"></i></a>
 

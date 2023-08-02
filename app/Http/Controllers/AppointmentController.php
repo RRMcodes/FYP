@@ -15,6 +15,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use PhpParser\Node\Stmt\If_;
 
 class AppointmentController extends Controller
 {
@@ -59,6 +60,9 @@ class AppointmentController extends Controller
     public function create()
     {
         $patients = Patient::all();
+        if (Auth::user()->role == 'patient'){
+            $patients = Patient::findOrFail(Auth::user()->id) ;
+        }
         $doctors = Doctor::all();
         return view('appointment.create')->with(compact('patients', 'doctors'));
     }

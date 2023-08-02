@@ -23,10 +23,14 @@
                                                     <label class="col-sm-2 col-form-label">Patient Name</label>
                                                 <div class="col-sm-10">
                                                     <select class="col-sm-4" name="patient_id" id="patient_name" required>
+                                                        @if(Auth::User()->role == 'staff')
                                                         <option value="" disabled selected>--Select--</option>
                                                         @foreach ($patients as $patient)
                                                             <option value="{{$patient->id}}" data-dob="{{$patient->dob}}" data-contact_number="{{$patient->contact_number}}" data-address="{{$patient->address}}" data-blood_group="{{$patient->blood_group}}">{{ucwords($patient->f_name.' '.$patient->l_name)}}</option>
                                                         @endforeach
+                                                        @elseif(Auth::User()->role == 'patient')
+                                                            <option value="{{$patients->id}}" data-dob="{{$patients->dob}}" data-contact_number="{{$patients->contact_number}}" data-address="{{$patients->address}}" data-blood_group="{{$patients->blood_group}}">{{ucwords($patients->f_name.' '.$patients->l_name)}}</option>
+                                                        @endif
                                                     </select>
                                                 </div>
                                             </div>

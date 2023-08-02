@@ -6,8 +6,10 @@ use App\Mail\SignupMail;
 use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use PhpParser\Node\Stmt\If_;
 
 class PatientController extends Controller
 {
@@ -93,8 +95,14 @@ class PatientController extends Controller
      */
     public function edit($id)
     {
-        $patient = Patient::find($id);
-        return view('patient.edit')->with(compact('patient'));
+        if (Auth::User()->id == $id){
+            $patient = Patient::find($id);
+            return view('patient.edit')->with(compact('patient'));
+        }
+        else
+        {
+            abort(403,"Unauthorized action");
+        }
     }
 
     /**

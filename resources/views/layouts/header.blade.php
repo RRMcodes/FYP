@@ -101,7 +101,15 @@
 {{--                                </a>--}}
 {{--                            </li>--}}
                             <li>
-                                <a href="{{route('profile.edit')}}">
+                                <a href="
+                                    @if(Auth::User()->role == 'staff')
+                                        {{route('staff.edit',['id'=>Auth::User()->id])}}
+                                    @elseif(Auth::User()->role == 'doctor')
+                                        {{route('doctor.edit',['id'=>Auth::User()->id])}}
+                                    @elseif(Auth::User()->role == 'patient')
+                                        {{route('patient.edit',['id'=>Auth::User()->id])}}
+                                    @endif
+                                ">
                                     <i class="feather icon-user"></i> Profile
                                 </a>
                             </li>
